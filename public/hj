@@ -1,0 +1,257 @@
+// "use client";
+
+// import React, { useState } from 'react';
+// import Link from 'next/link';
+// import {
+//   Collapsible,
+//   CollapsibleContent,
+//   CollapsibleTrigger,
+// } from "@/components/ui/collapsible"
+
+// import {
+//   ShoppingCart,
+//   Home,
+//   BaggageClaim,
+//   ShoppingBag,
+//   ShoppingBasket,
+//   Cable,
+//   BarChart,
+//   Files,
+//   ChevronLeft,
+//   ChevronRight
+// } from 'lucide-react';
+
+
+
+// const Sidebar = () => {
+//   const [collapsed, setCollapsed] = useState(false);
+
+//   const toggleCollapse = () => {
+//     setCollapsed(!collapsed);
+//   };
+
+//   const menuItems = [
+//     { icon: Home, label: 'Home', link: '#' },
+//     { icon: BaggageClaim, label: 'Inventory' },
+//     { icon: ShoppingBag, label: 'Sales' },
+//     { icon: ShoppingBasket, label: 'Purchases' },
+//     { icon: Cable, label: 'Integrations', link: '#' },
+//     { icon: BarChart, label: 'Reports', link: '#' },
+//     { icon: Files, label: 'Documents', link: '#' },
+//     { icon: Files, label: 'Catalogue', link: '#' },
+//     { icon: Files, label: 'Vendors', link: '#' },
+//   ];
+
+//   return (
+//     <div className={`min-h-screen bg-slate-900 text-slate-50 flex flex-col justify-between
+//      transition-all duration-300 ${collapsed ? 'w-20' : 'w-60'}`}>
+      
+//       {/* Top Section - Logo */}
+//       <div>
+//         <Link href="#" className="bg-slate-800 flex items-center space-x-2 py-4 px-4">
+//           <ShoppingCart className="w-6 h-6" />
+//           {!collapsed && <span className="text-2xl font-semibold">Inventory</span>}
+//         </Link>
+
+// <Collapsible>
+//   <CollapsibleTrigger className="p-2 flex items-center space-x-2" ><ShoppingCart className="w-6 h-6" />
+//           {!collapsed && <span className="text-2xl font-semibold">Inventory</span>}</CollapsibleTrigger>
+//   <CollapsibleContent>
+//     Yes. Free to use for personal and commercial projects. No attribution
+//     required.
+//   </CollapsibleContent>
+// </Collapsible>
+
+
+//         {/* Navigation */}
+//         <nav className="flex flex-col gap-5 py-6 px-2">
+//           {menuItems.map((item, index) => {
+//             const Icon = item.icon;
+//             const commonClass = `flex items-center space-x-2 py-2 px-3 rounded-md
+//              hover:bg-slate-700 transition-colors ${item.label === 'Home' ? 'bg-blue-600 text-white' : ''}`;
+
+//             return item.link ? (
+//               <Link key={index} href={item.link} className={commonClass}>
+//                 <Icon className="w-6 h-6" />
+//                 {!collapsed && <span>{item.label}</span>}
+//               </Link>
+//             ) : (
+//               <button key={index} className={commonClass}>
+//                 <Icon className="w-6 h-6" />
+//                 {!collapsed && <span>{item.label}</span>}
+//               </button>
+//             );
+//           })}
+//         </nav>
+//       </div>
+
+//       {/* Bottom Section - Collapse Icon */}
+//       <div className="px-4 py-4">
+//         <button
+//           onClick={toggleCollapse}
+//           className="flex items-center space-x-2 bg-slate-800 px-3 py-2 justify-center rounded-md w-full"
+//         >
+//           {collapsed ? <ChevronRight className="w-5 h-5" /> : <ChevronLeft className="w-5 h-5" />}
+//           {!collapsed && <span>Collapse</span>}
+//         </button>
+//       </div>
+//     </div>
+//   );
+// };
+
+
+// second one 
+
+// // export default Sidebar;
+
+//  "use client"
+// import React, { useState } from 'react';
+// import Link from 'next/link';
+// import {
+//   Collapsible,
+//   CollapsibleContent,
+//   CollapsibleTrigger,
+// } from "@/components/ui/collapsible";
+
+// import {
+//   ShoppingCart,
+//   Home,
+//   BaggageClaim,
+//   ShoppingBag,
+//   ShoppingBasket,
+//   Cable,
+//   BarChart,
+//   Files,
+//   ChevronLeft,
+//   ChevronRight
+// } from 'lucide-react';
+// import SubscribtionCard from '../SubscribtionCard';
+
+
+
+// export default function sidebar() {
+
+// // const Sidebar = () => {
+//   const [collapsed, setCollapsed] = useState(false);
+
+//   const toggleCollapse = () => {
+//     setCollapsed(!collapsed);
+//   };
+
+// return (
+//     <div  className='w-60 min-h-screen bg-slate-800 
+//     text-slate-50 fixed'>
+      
+//       {/* top part */}
+
+//  <div className="flex flex-col">
+//   {/* logo */}
+//   <Link href="#" 
+//   className='bg-slate-950 flex space-x-2 items-center py-3 px-2'>
+    
+//     <ShoppingCart />
+//     <span 
+//     className='text-xl font-semibold'>Inventory</span>
+//      </Link>
+//      {/* links */}
+
+//      <nav className='flex flex-col gap-3 px-3 py-6'> 
+
+//     <Link href="#" 
+//     className='flex items-center
+//      space-x-2 bg-blue-600 text-slate-50 p-2
+//       rounded-md'>
+// <Home className='w-4 h-4'>
+//    <span>Home</span></Home>
+
+//       </Link>
+//       <button className='p-2 flex items-center'>
+// <BaggageClaim className='w-4 h-4'/>
+// <span>Inventory</span>
+//       </button>
+// <button className='p-2 flex items-center space-x-2'> 
+
+//   <ShoppingBasket className='w-4 h-4'/>
+ 
+// <span> Sales</span>
+
+// </button>
+
+// <button className='flex items-center space-x-2 p-2'> 
+// <ShoppingBag className='w-4 h-4'/>
+// <span> Purchases</span>
+
+// </button>
+// <Link href="#" 
+// className='flex items-center space-x-2 p-2'>
+//   <Files className='w-4 h-4'/>
+//   <span>Intergrations</span>
+//    </Link>
+
+
+// <Link href="#" 
+// className='flex items-center space-x-2 p-2'>
+//   <Files className='w-4 h-4'/>
+//   <span>Reports</span>
+//    </Link>
+
+
+
+// <Link href="#" 
+// className='flex items-center space-x-2 p-2'>
+//   <Files className='w-4 h-4'/>
+//   <span>Documents</span>
+//    </Link>
+
+
+//      </nav>
+//      <SubscribtionCard/>
+//  </div>
+    
+// {/* buttom */}
+
+//  {/* Bottom Section - Collapse Icon */}
+//       <div className="px-4 py-4">
+//           <button
+//           onClick={toggleCollapse}
+//           className="flex items-center space-x-2 
+//           bg-slate-800 px-3 py-2 justify-center 
+//           rounded-md w-full"
+//         >
+//           {collapsed ? <ChevronRight className="w-5 h-5" /> : 
+//           <ChevronLeft className="w-5 h-5"/>}
+//           {!collapsed && <span>Collapse</span>}
+//         </button>
+//       </div>
+
+//       </div>
+//   );
+// }
+
+ <Link 
+className="flex items-center 
+  justify-between pl-8  pr-4 hover:bg-slate-800 
+  transition-all duration-300 py-2 rounded-md " href="#">
+  <span className='text-sm'>Item Groups</span>
+    <PlusCircle 
+   className='w-4 h-4'/>
+  </Link>
+ 
+{/* second sub link */}
+//   <Link 
+// className="flex items-center 
+//   justify-between pl-8  pr-4 hover:bg-slate-800 
+//   transition-all duration-300 py-2 rounded-md " href="#">
+//   <span className='text-sm'>Inventory Adjustments</span>
+//     <PlusCircle 
+//    className='w-4 h-4'/>
+//   </Link>
+
+//    <Link 
+// className="flex items-center 
+//   justify-between pl-8  pr-4 hover:bg-slate-800 
+//   transition-all duration-300 py-2 rounded-md " href="#">
+//   <span className='text-sm'>Items</span>
+//     <PlusCircle 
+//    className='w-4 h-4'/>
+//   </Link>
