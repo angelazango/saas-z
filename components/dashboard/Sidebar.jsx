@@ -26,12 +26,27 @@ const  Sidebar = () => {
   const inventoryLinks = [
     {
       title: "Items",
-      href: "/dashboard/inventory", 
+      href: "/dashboard/inventory/items/new", 
        
     },
     {
-      title: "Items Groups",
-      href: "/dashboard/inventory", 
+      title: "categories",
+      href: "/dashboard/inventory/categories/new", 
+       
+    },
+     {
+      title: "brands",
+      href: "/dashboard/inventory/brands/new", 
+       
+    },
+     {
+      title: "units",
+      href: "/dashboard/inventory/units/new", 
+       
+    },
+     {
+      title: "warehouse",
+      href: "/dashboard/inventory/warehouse/new", 
        
     },
     {

@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 import CollapsibleLink from './CollapsibleLink';
-import { BaggageClaim } from 'lucide-react';
+import { BaggageClaim, ChevronDown, ChevronRight } from 'lucide-react';
 
 export default function SideBarDropdownLink({ title, items, icon:Icon }) {
   
@@ -19,10 +19,16 @@ export default function SideBarDropdownLink({ title, items, icon:Icon }) {
 
   return (
     <Collapsible>
-      <CollapsibleTrigger className="p-2 flex items-center space-x-2">
+      <CollapsibleTrigger className="
+      flex justify-between w-full   items-center">
+        <div className="p-2 flex items-center space-x-2">
+
+        
         <Icon className="w-5 h-5" />
         <span className="text-xl 
         font-semibold">{title}</span>
+        </div>
+        <ChevronRight className='w-4 4' />
       </CollapsibleTrigger>
       <CollapsibleContent>
         {items.map((item, i) => (
