@@ -2,6 +2,9 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import SubscribtionCard from '../SubscribtionCard';
+import SideBarDropdownLink from './SideBarDropdownLink';
+
 
 import CollapsibleLink from './CollapsibleLink';
 
@@ -19,14 +22,14 @@ import {
   PlusCircle
 } from 'lucide-react';
 
-import SubscribtionCard from '../SubscribtionCard';
-import SideBarDropdownLink from './SideBarDropdownLink';
+import SubscriptionCard from '../SubscribtionCard';
+// import SideBarDropdownLink from './SideBarDropdownLink';
 
 const  Sidebar = () => {
   const inventoryLinks = [
     {
       title: "Items",
-      href: "/dashboard/inventory/items/new", 
+      href: "/dashboard/inventory/items", 
        
     },
     {
@@ -99,15 +102,13 @@ const  Sidebar = () => {
        
     },
     {
-      title: "slaes returns",
+      title: "sales returns",
       href: "#", 
        
     },
       
   ]
-
-
-  const [collapsed, setCollapsed] = useState(false);
+const [collapsed, setCollapsed] = useState(false);
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -145,7 +146,7 @@ const  Sidebar = () => {
           </Link>
 
 
-  <SideBarDropdownLink 
+<SideBarDropdownLink 
  items={inventoryLinks} 
  title="Inventory"
   icon={BaggageClaim} />
@@ -155,29 +156,14 @@ const  Sidebar = () => {
  title="sales"
   icon={ShoppingBasket} />
   
-
-
- 
-  
-
-  
-
-  
-
-  
-  
-
-  
- 
-
 {/* Other buttons/links */}
          
 
-  <button className="flex items-center space-x-2 py-2 
+  {/* <button className="flex items-center space-x-2 py-2 
   px-3 hover:bg-slate-700 rounded-md">
      <ShoppingBasket className="w-4 h-4" />
             {!collapsed && <span>Sales</span>}
-          </button>
+          </button> */}
 
           <button className="flex items-center
            space-x-2 py-2 px-3 hover:bg-slate-700 rounded-md">
@@ -223,16 +209,15 @@ const  Sidebar = () => {
 
           <Link
             href="#"
-            className="flex items-center space-x-2 py-2 px-3 hover:bg-slate-700 rounded-md"
+            className="flex items-center space-x-2 py-2 px-3
+             hover:bg-slate-700 rounded-md"
           >
             <Files className="w-4 h-4" />
             {!collapsed && <span>Vendors</span>}
           </Link>
         </nav>
 
-        {/* Optional: Subscription card 
-        (hidden when collapsed) */}
-        {!collapsed && <SubscribtionCard />}
+       
       </div>
 
       {/* Bottom - Collapse button */}
@@ -248,7 +233,7 @@ const  Sidebar = () => {
           ) : (
             <>
               <ChevronLeft className="w-5 h-5" />
-              <span>Collapse</span>
+              
             </>
           )}
         </button>

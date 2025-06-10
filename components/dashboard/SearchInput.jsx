@@ -39,7 +39,7 @@ const SearchInput = () => {
              dark:text-white
              dark:focus:ring-blue-500
              dark:focus:border-blue-500"
-          placeholder="Search in customers ..."
+          placeholder="Search in customers..."
           required
         />
       </div>

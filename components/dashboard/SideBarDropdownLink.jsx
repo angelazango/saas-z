@@ -1,16 +1,34 @@
 "use client";
 import React from 'react';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+
 import { useState } from 'react';
 
+import { Collapsible,
+  CollapsibleContent,CollapsibleTrigger
+ } from "@/components/ui/collapsible";
 
 
-import CollapsibleLink from './CollapsibleLink';
+// import {
+//   Collapsible,
+//   CollapsibleContent,
+//   CollapsibleTrigger,
+// } from "@/components/ui/collapsible";
+// import { Collapsible } from "../ui/collapsible"; 
+// import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "../../ui/collapsible";
+
+// import { Collapsible,
+//    CollapsibleContent,
+//     CollapsibleTrigger } from "@/components/ui/collapsible";
+
+// import { Collapsible,
+//   CollapsibleContent,
+//   CollapsibleTrigger
+//  } from "@/components/ui/collapsible.jsx";
+
+
+
 import { BaggageClaim, ChevronDown, ChevronRight } from 'lucide-react';
+import CollapsibleLink from './CollapsibleLink';
 
 export default function SideBarDropdownLink({ title, items, icon:Icon }) {
   
@@ -22,9 +40,7 @@ export default function SideBarDropdownLink({ title, items, icon:Icon }) {
       <CollapsibleTrigger className="
       flex justify-between w-full   items-center">
         <div className="p-2 flex items-center space-x-2">
-
-        
-        <Icon className="w-5 h-5" />
+        <Icon className="w-5 h-5"/>
         <span className="text-xl 
         font-semibold">{title}</span>
         </div>

@@ -1,13 +1,12 @@
-"use client"
-import React from 'react'
+"use client";
+import React from "react";
 
-export default function TextInput({
+export default function TextAreaInput({
   label,
   name,
   register,
   errors,
   isRequired = true,
-  type = "text",
   className = "sm:col-span-2",
 }) {
   return (
@@ -18,23 +17,24 @@ export default function TextInput({
       >
         {label}
       </label>
+
       <div className="mt-2">
-        <input
+        <textarea
           {...register(name, { required: isRequired })}
-          type={type}
           name={name}
           id={name}
-          autoComplete={name}
-          className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm"
+          rows={5} 
+          className="block w-full rounded-md border border-gray-300 py-2 px-3 
+          text-gray-900 shadow-sm placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 
+          sm:text-sm sm:leading-6"
           placeholder={`Type the ${label.toLowerCase()}`}
         />
-                {errors.name && ( 
-            <span className="text-sm text-red-600">
-    {label} is required
-            </span>
-           )}
+
+        {errors[`${name}`] && (
+          <span className="text-sm text-red-600">
+            {label} is required</span>
+        )}
       </div>
     </div>
-  )
+  );
 }
-  

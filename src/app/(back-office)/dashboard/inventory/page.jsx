@@ -3,7 +3,7 @@
 import React from 'react';
 import OptionCard from '../../../../../components/dashboard/OptionCard';
 import FixedHeader from '../../../../../components/dashboard/FixedHeader';
-import { ScrollText, Shirt, Boxes } from 'lucide-react';
+import { ScrollText, Shirt, Boxes, Component } from 'lucide-react';
 import Link from 'next/link';
 
 
@@ -11,37 +11,53 @@ import Link from 'next/link';
 export default function Inventory() {
 // const { title,description,link,linkTitle,enabled } = optionData;
   const optionCards = [
-    {
-      title: "Items Groups",
-      description: "Create what you like and more",
-      link: "/dashboard/inventory/item-groups/new",
-      linkTitle: "New Item Group",
-      enabled: true,
-      icon: Boxes,
-    },
+    // {
+    //   title: "Items Groups",
+    //   description: "Create what you like and more",
+    //   link: "/new",
+    //   linkTitle: "Nesw Item Group",
+    //   enabled: true,
+    //   icon: Component,
+    // },
     {
       title: "Items",
       description: "Create what you like",
       link: "/dashboard/inventory/items/new",
-      linkTitle: "New Item",
+      linkTitle:"New Item",
       enabled: true,
+      icon: Shirt,
+    },
+    {
+      title: "Categories",
+      description: "Create what you like",
+      link: "/dashboard/inventory/categories/new",
+      linkTitle: "New Categories",
+      enabled:true,
       icon: Boxes,
     },
     {
-      title: "Composite Items",
+      title: "Brands",
       description: "Create what you like",
-      link: "/dashboard/inventory/composite-items/new",
-      linkTitle: "New Composite Item",
-      enabled: false,
-      icon: Boxes,
-    },
-    {
-      title: "Price Lists",
-      description: "Create what you like",
-      link: "/dashboard/inventory/price-lists/new",
+      link: "/dashboard/inventory/brands/new",
       linkTitle: "New Price List",
       enabled: true,
       icon: ScrollText,
+    },
+    {
+      title: "Warehouse",
+      description: "Create what you like",
+      link: "/dashboard/inventory/warehouse/new",
+      linkTitle: "New warehouse",
+      enabled: true,
+      icon: ScrollText,
+    },
+    {
+      title: "units",
+      description: "Create what you like",
+      link: "/dashboard/inventory/units/new ",
+      linkTitle:"New units",
+      enabled: true,
+      icon: Component,
     },
   ];
 

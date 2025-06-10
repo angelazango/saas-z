@@ -1,11 +1,13 @@
 // "use client";
+
 // import React, { useState } from 'react';
-// import Link from "next/link";
-// // Remove CrossSign import if not used
-// // import CrossSign from "lucide-react";
-// import FormHeader from '../../../../../../../components/dashboard/FormHeader';
 // import { useForm } from 'react-hook-form';
+// import { useRouter } from 'next/navigation'; // ✅ Next.js router for client-side redirect
+
+// import FormHeader from '../../../../../../../components/dashboard/FormHeader';
 // import TextInput from '../../../../../../../components/FormInputs/TextInput';
+// import SubmitButton from '../../../../../../../components/FormInputs/SubmitButton';
+// import TextAreaInput from '../../../../../../../components/FormInputs/TextAreaInput';
 
 // export default function NewCategory() {
 //   const {
@@ -14,90 +16,146 @@
 //     reset,
 //     formState: { errors },
 //   } = useForm();
-//   const [loading,setLoading]=useState(false);
 
-//   // onSubmit handler
-//   function onSubmit(data) {
-//     console.log(data); 
-//     resizeTo()     
-    
-//     // handle form data here
-//   }
+//   const [loading, setLoading] = useState(false);
+//   const router = useRouter(); // ✅ Initialize router
+
+//   const onSubmit = async (data) => {
+//     console.log("Submitting category:", data);
+//     setLoading(true);
+//     const baseUrl = "http://localhost:3000"; // ⚠️ Make sure this works with your API
+
+//     try {
+//       const response = await fetch(`${baseUrl}/api/categories`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(data),
+//       });
+
+//       if (response.ok) {
+//         const newCategory = await response.json();
+//         console.log("Category created:", newCategory);
+
+//         reset();
+
+//         // ✅ Redirect to Categories Page after success
+//         router.push("/dashboard/inventory/categories"); // 🔁 Replace with your actual Categories path
+//       } else {
+//         console.error("Failed to create category");
+//       }
+//     } catch (error) {
+//       console.error("Submission error:", error);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
 //   return (
 //     <div>
-//       {/* header */}
-//       <FormHeader title="New Category" href="#" />
+//       {/* Header */}
+//       <FormHeader title="New Category" href="/dashboard/inventory/" />
 
-//       {/* form */}
-//       <form 
+//       {/* Form */}
+//       <form
 //         onSubmit={handleSubmit(onSubmit)}
-//         className='w-full max-w-4xl p-4 bg-white border 
-//         border-gray-300 rounded-lg shadow sm:p-6 
-//         dark:bg-gray-800 
-//         dark:border-gray-500 mx-auto mt-3'
+//         className="w-full max-w-4xl p-4 bg-white border border-gray-300 rounded-lg 
+//         shadow sm:p-6 dark:bg-gray-800 dark:border-gray-500 mx-auto mt-3"
 //       >
-//         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
+//         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
 //           <TextInput  
-//             label="Category Title"  
-//             name="title"  // <-- Fixed here
-//             register={register} 
-//             errors={errors} 
-//           /> 
+//             label="Category Title"
+//             name="title"
+//             register={register}
+//             errors={errors}
+//           />
+
+//           <TextAreaInput
+//             label="Category Description"
+//             name="description"
+//             register={register}
+//             errors={errors}
+//           />
 //         </div>
 
-//         <div className="py-4 mt-6 sm:col-span-1">
-
-//         {loading? (
-//           <button 
-//           disabled
-//           type="button"
-//           className='text-white bg-purple-700
-//           hover:bg-purple-800 focus:ring-4 focus:outline-none 
-//           focus-purple-300 font-medium rounded-lg text-sm px-5 py-2.5
-//           text-center mr-2 
-//           dark:bg-purple-600 
-//           dark:hover:bg-purple-700
-//           dark:focus:ring-purple-800 inline-flex
-//           items-center
-//            '> 
-//            <svg
-//            aria-hidden="true"
-//            role="status"
-//            className='inline w-4 h-4 mr-3 text-white animate-spin'
-//            viewBox='0 0 100 102'
-//            fill='none'
-//            xmlns='http://www.w3.org/2000/svg'>
-
-// {/* <path 
-// d="M100 50.5908C100 78.2051 77.2051 77.6142 100.591 50 100.591C22.3"
-
-//            </svg>
-           
-//            </button>
-//         )} */}
-
-
-
-
-
-        
-//           <button type="submit" className="w-36 
-//           text-white
-//             bg-blue-700 hover:bg-blue-800 
-//             focus:ring-blue-300 font-medium 
-//             rounded-lg text-sm 
-//             px-5 py-2.5 text-center 
-//             dark:bg-blue-600 dark:hover:bg-blue-700 
-//             dark:focus:ring-blue-800">
-//             Submit
-//           </button>
-
-
-
-//         </div>
+//        <SubmitButton isLoading={loading} title="Create Category" />
 //       </form>
 //     </div>
 //   );
 // }
- 
+"use client";
+
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+
+import FormHeader from '../../../../../../../components/dashboard/FormHeader';
+import TextInput from '../../../../../../../components/FormInputs/TextInput';
+import SubmitButton from '../../../../../../../components/FormInputs/SubmitButton';
+import TextAreaInput from '../../../../../../../components/FormInputs/TextAreaInput';
+
+export default function NewCategory() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    try {
+      // Get existing categories from localStorage
+      const existing = JSON.parse(localStorage.getItem("categories")) || [];
+
+      // Add the new category
+      const updatedCategories = [...existing, data];
+
+      // Save back to localStorage
+      localStorage.setItem("categories", JSON.stringify(updatedCategories));
+
+      // Reset form and redirect
+      reset();
+      router.push("/dashboard/inventory/categories"); // ✅ redirect to Categories page
+    } catch (error) {
+      console.error("LocalStorage error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div>
+      <FormHeader title="New Category" href="/dashboard/inventory/" />
+
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full max-w-4xl p-4 bg-white border border-gray-300 rounded-lg 
+        shadow sm:p-6 dark:bg-gray-800 dark:border-gray-500 mx-auto mt-3"
+      >
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <TextInput
+            label="Category Title"
+            name="title"
+            register={register}
+            errors={errors}
+          />
+
+          <TextAreaInput
+            label="Category Description"
+            name="description"
+            register={register}
+            errors={errors}
+          />
+        </div>
+
+        <SubmitButton isLoading={loading} title="Create Category" />
+      </form>
+    </div>
+  );
+}

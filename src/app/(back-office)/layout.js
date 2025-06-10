@@ -19,7 +19,7 @@ export default function Layout
          min-h-screen">
              <Header />
              <HomeNav/>
-             {children }
+             { children }
         </main>
       </div>
  
