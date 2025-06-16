@@ -1,17 +1,18 @@
-// import Header from '../../components/dashboard/Header';
-// import './globals.css'; 
+
+
+'use client'
 
 import Header from "../../../components/dashboard/Header";
 import HomeNav from "../../../components/HomeNav";
 import Sidebar from "../../../components/dashboard/Sidebar";
+import { Provider } from "react-redux";
+import store from "@/src/redux/store";
 
-
-
-export default function Layout
+export default function Layout 
 
  ({ children }) {
   return (
-   
+      <Provider store={store}>
       <div className="flex">
        <Sidebar />
         <main className="w-full 
@@ -22,7 +23,7 @@ export default function Layout
              { children }
         </main>
       </div>
- 
+ </Provider>
   );
 
 }

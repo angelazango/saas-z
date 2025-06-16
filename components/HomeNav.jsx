@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import { Building2 } from 'lucide-react';
 import Link from 'next/link';
@@ -24,9 +23,9 @@ export default function HomeNav() {
           </div>
           <div className="flex flex-col ml-3">
             <p className="font-semibold text-slate-700">
-              Hello, Angel WEB DEVELOPER
+              Hello, Angela WEB DEVELOPER
             </p>
-            <span className="text-orange">Garat</span>
+            <span className="text-orange">SAAS-Z</span>
           </div>
         </div>
       </div>

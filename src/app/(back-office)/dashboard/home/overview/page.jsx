@@ -1,18 +1,16 @@
-import React from 'react'
+'use client'
+
+import React from 'react';
 import DashboardBanner from '../../../../../../components/dashboard/DashboardBanner';
 import SalesOverview from '../../../../../../components/dashboard/SalesOverview';
 
-
-const dashboard
-  = () => {
+const Dashboard = () => {
   return (
-    <div className="text-red-500 ">
-      <DashboardBanner/>
-      <SalesOverview/>
-         
+    <div className="text-red-500">
+      <DashboardBanner />
+      <SalesOverview />
     </div>
-  )
-}
+  );
+};
 
-export default dashboard;
- 
+export default Dashboard;

@@ -1,79 +1,101 @@
-"use client";
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import FormHeader from '../../../../../../../components/dashboard/FormHeader';
-import TextInput from '../../../../../../../components/FormInputs/TextInput';
-import SubmitButton from '../../../../../../../components/FormInputs/SubmitButton';
-import TextAreaInput from '../../../../../../../components/FormInputs/TextAreaInput';
+'use client';
 
-export default function NewBrand() {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
-  const [loading, setLoading] = useState(false);
 
-  const onSubmit = async (data) => {
-    console.log("Submitting unit:", data);
-    setLoading(true);
-    const baseUrl = "http://localhost:3000";
+import {
+  createVendorStart,
+  createVendorSuccess,
+  createVendorFailure,
+} from '@/src/redux/slice/vendorSlice';
+
+
+import { URL } from '@/config';
+
+export default function VendorForm({ onCancel, onSuccess }) {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.vendor);
+
+  const [vendorName, setVendorName] = useState('');
+  const [description, setDescription] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const vendorData = {
+      vendor_name: vendorName,
+      description: description,
+    };
 
     try {
-      const response = await fetch(`${baseUrl}/api/brands`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      dispatch(createVendorStart());
+      const response = await axios.post(`${URL}/vendor`, vendorData);
+      dispatch(createVendorSuccess(response.data));
 
-      if (response.ok) {
-        console.log("brands created:", await response.json());
-        reset();
-      } else {
-        console.error("Failed to create brands");
-      }
-    } catch (error) {
-      console.error("Submission error:", error);
-    } finally {
-      setLoading(false);
+      alert('Vendor created successfully!');
+      setVendorName('');
+      setDescription('');
+
+      if (onSuccess) onSuccess();
+    } catch (err) {
+      dispatch(createVendorFailure(err.response?.data?.message || 'Failed to create vendor.'));
     }
   };
 
   return (
-    <div>
-      {/* header */}
-      <FormHeader title="New Brands" href="/dashboard/inventory/" />
-
-      {/* form */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-4xl p-4 bg-white border border-gray-300 rounded-lg 
-        shadow sm:p-6 dark:bg-gray-800 dark:border-gray-500 mx-auto mt-3"
-      >
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-          <TextInput  
-            label="Brand Title"
-            name="title"
-            register={register}
-            errors={errors}
-            className='w-full'
-          />
-       
-          {/* <TextAreaInput
-            label="Category Description"
-            name="description"  // ✅ fixed spelling
-            register={register}
-            errors={errors}
-          /> */}
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Create New Vendor</h2>
+          <button onClick={onCancel} className="text-gray-500 hover:text-gray-700 text-xl font-bold">×</button>
         </div>
 
-        <SubmitButton isLoading={loading}
-         title="Brand" />
-      </form>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Vendor Name</label>
+            <input
+              type="text"
+              value={vendorName}
+              onChange={(e) => setVendorName(e.target.value)}
+              className="w-full border p-2 rounded focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-1">Description</label>
+            <textarea
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className="w-full border p-2 rounded focus:ring-2 focus:ring-blue-500"
+              rows="4"
+              required
+            />
+          </div>
+
+          {error && <p className="text-red-500 text-sm">Error: {error}</p>}
+
+          <div className="flex space-x-3 pt-4">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="flex-1 bg-gray-300 text-gray-700 p-2 rounded"
+              disabled={loading}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="flex-1 bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? 'Creating...' : 'Create Vendor'}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
