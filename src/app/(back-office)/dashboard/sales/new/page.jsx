@@ -1,188 +1,185 @@
-// 'use client';
-// import React, { useEffect, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { postSale, fetchSales } from '@/src/redux/thunks/saleThunks';
-// // import { fetchProductsThunk } from '@/src/redux/thunks/productThunks';
+'use client';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { URL } from '@/config';
 
-// import { postSale, fetchSales } from '@/src/redux/thunks/saleThunks';
+export default function SaleForm({ sale, onCancel, onSuccess }) {
+  const [formData, setFormData] = useState({
+    product_id: sale?.product_id || '',
+    quantity: sale?.quantity || 1,
+    unit_price: sale?.unit_price || 1,
+    cashier_id: sale?.cashier_id || '',
+    sale_date: sale?.sale_date ? sale.date.slice(0, 10) : new Date().toISOString().slice(0, 10),
+  });
 
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-// import { fetchProductsThunk } from '@/src/redux/thunks/productThunks';
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(`${URL}/product`);
+        setProducts(response.data.products || []);
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+        setError('Failed to load products');
+      }
+    };
+    fetchProducts();
+  }, []);
 
-// // import { fetchProducts } from '@/src/redux/thunks/productThunks';
+  useEffect(() => {
+    if (formData.product_id) {
+      const selectedProduct = products.find(p => p.product_id === formData.product_id);
+      if (selectedProduct?.unit_price) {
+        setFormData(prev => ({
+          ...prev,
+          unit_price: selectedProduct.unit_price,
+        }));
+      }
+    }
+  }, [formData.product_id, products]);
 
-// export default function SalesPage() {
-//   const dispatch = useDispatch();
-  
-//   // Safely access Redux state with default values
-//   const products = useSelector((state) => state.product?.items || []);
-//   const sales = useSelector((state) => state.sales?.sales || []);
-//   const loading = useSelector((state) => state.sales?.loading || false);
-//   const error = useSelector((state) => state.sales?.error || null);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === 'quantity' || name === 'unit_price' ? parseFloat(value) || 0 : value
+    }));
+  };
 
-//   const [form, setForm] = useState({
-//     productName: '',
-//     unit_price: '',
-//     quantity: '',
-//   });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-//   useEffect(() => {
-//     dispatch(fetchProducts());
-//     dispatch(fetchSales()); // Fetch existing sales when component mounts
-//   }, [dispatch]);
+    try {
+      const payload = {
+        product_id: formData.product_id,
+        quantity: formData.quantity,
+        unit_price: formData.unit_price,
+        cashier_id: formData.cashier_id,
+        sale_date: formData.sale_date,
+      };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-    
-//     // Validate form inputs
-//     if (!form.productName) {
-//       alert('Please select a product');
-//       return;
-//     }
-//     if (!form.unit_price || isNaN(form.unit_price)) {
-//       alert('Please enter a valid unit price');
-//       return;
-//     }
-//     if (!form.quantity || isNaN(form.quantity)) {
-//       alert('Please enter a valid quantity');
-//       return;
-//     }
+      if (sale) {
+        await axios.put(`${URL}/sale/${sale.id}`, {
+          ...payload,
+          id: sale.id
+        });
+      } else {
+        await axios.post(`${URL}/sale`, payload);
+      }
 
-//     const selectedProduct = products.find(
-//       (p) => p.material_name === form.productName
-//     );
-//     if (!selectedProduct) {
-//       alert('Invalid product selected.');
-//       return;
-//     }
+      onSuccess();
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to save sale.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
-//     const salePayload = {
-//       product_id: selectedProduct.id,
-//       product_name: selectedProduct.material_name, // Include product name for display
-//       unit_price: parseFloat(form.unit_price), // Use parseFloat for decimal prices
-//       quantity: parseInt(form.quantity),
-//       total: parseFloat(form.unit_price) * parseInt(form.quantity), // Calculate total
-//     };
+  return (
+    <div className="fixed inset-0 backdrop-blur rounded-2xl shadow-lg flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div className="p-6">
+          <h2 className="text-xl font-semibold mb-4">
+            {sale ? 'Edit Sale' : 'Add New Sale'}
+          </h2>
 
-//     try {
-//       await dispatch(postSale(salePayload));
-//       // Reset form after successful submission
-//       setForm({
-//         productName: '',
-//         unit_price: '',
-//         quantity: '',
-//       });
-//       // Refresh sales list
-//       dispatch(fetchSales());
-//     } catch (err) {
-//       console.error('Error submitting sale:', err);
-//     }
-//   };
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+              {error}
+            </div>
+          )}
 
-//   return (
-//     <div className="p-6 max-w-4xl mx-auto">
-//       <h2 className="text-2xl font-bold mb-6">Sales Management</h2>
-      
-//       {/* Sales Form */}
-//       <div className="bg-white p-6 rounded-lg shadow mb-6">
-//         <h3 className="text-xl font-semibold mb-4">Record a Sale</h3>
-//         <form onSubmit={handleSubmit} className="space-y-4">
-//           <div>
-//             <label className="block text-sm font-medium mb-2">Product</label>
-//             <select
-//               className="w-full p-2 border rounded"
-//               value={form.productName}
-//               onChange={(e) => setForm({ ...form, productName: e.target.value })}
-//               required
-//             >
-//               <option value="">Select Product</option>
-//               {products.map((prod) => (
-//                 <option key={prod.id} value={prod.material_name}>
-//                   {prod.material_name}
-//                 </option>
-//               ))}
-//             </select>
-//           </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Product
+              </label>
+              <select
+                name="product_id"
+                value={formData.product_id}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              >
+                <option value="">Select a product</option>
+                {products.map(product => (
+                  <option key={product.product_id} value={product.product_id}>
+                    {product.product_name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-//           <div>
-//             <label className="block text-sm font-medium mb-2">Unit Price</label>
-//             <input
-//               type="number"
-//               step="0.01"
-//               min="0"
-//               placeholder="0.00"
-//               className="w-full p-2 border rounded"
-//               value={form.unit_price}
-//               onChange={(e) => setForm({ ...form, unit_price: e.target.value })}
-//               required
-//             />
-//           </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Quantity
+              </label>
+              <input
+                type="number"
+                name="quantity"
+                min="1"
+                value={formData.quantity}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
 
-//           <div>
-//             <label className="block text-sm font-medium mb-2">Quantity</label>
-//             <input
-//               type="number"
-//               min="1"
-//               placeholder="1"
-//               className="w-full p-2 border rounded"
-//               value={form.quantity}
-//               onChange={(e) => setForm({ ...form, quantity: e.target.value })}
-//               required
-//             />
-//           </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Unit Price
+              </label>
+              <input
+                type="number"
+                name="unit_price"
+                min="1"
+                step="0.01"
+                value={formData.unit_price}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
 
-//           <button
-//             type="submit"
-//             className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 disabled:opacity-50"
-//             disabled={loading}
-//           >
-//             {loading ? 'Processing...' : 'Submit Sale'}
-//           </button>
-          
-//           {error && (
-//             <p className="text-red-500 mt-2">{error}</p>
-//           )}
-//         </form>
-//       </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Date
+              </label>
+              <input
+                type="date"
+                name="sale_date"
+                value={formData.sale_date}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
 
-//       {/* Sales List */}
-//       <div className="bg-white p-6 rounded-lg shadow">
-//         <h3 className="text-xl font-semibold mb-4">Sales History</h3>
-//         {loading ? (
-//           <p>Loading sales...</p>
-//         ) : sales.length === 0 ? (
-//           <p className="text-gray-500">No sales recorded yet</p>
-//         ) : (
-//           <div className="overflow-x-auto">
-//             <table className="min-w-full">
-//               <thead>
-//                 <tr className="border-b">
-//                   <th className="text-left p-2">Product</th>
-//                   <th className="text-left p-2">Unit Price</th>
-//                   <th className="text-left p-2">Quantity</th>
-//                   <th className="text-left p-2">Total</th>
-//                   <th className="text-left p-2">Date</th>
-//                 </tr>
-//               </thead>
-//               <tbody>
-//                 {sales.map((sale) => (
-//                   <tr key={sale.id} className="border-b">
-//                     <td className="p-2">{sale.product_name || 'N/A'}</td>
-//                     <td className="p-2">${sale.unit_price?.toFixed(2)}</td>
-//                     <td className="p-2">{sale.quantity}</td>
-//                     <td className="p-2 font-medium">
-//                       ${(sale.unit_price * sale.quantity)?.toFixed(2)}
-//                     </td>
-//                     <td className="p-2 text-sm text-gray-500">
-//                       {new Date(sale.created_at || sale.create_at).toLocaleString()}
-//                     </td>
-//                   </tr>
-//                 ))}
-//               </tbody>
-//             </table>
-//           </div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
+            <div className="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
+                disabled={loading}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                disabled={loading}
+              >
+                {loading ? 'Saving...' : 'Save Sale'}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}

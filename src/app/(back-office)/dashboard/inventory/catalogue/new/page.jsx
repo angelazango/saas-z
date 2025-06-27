@@ -1,125 +1,125 @@
+// src/app/catalog/new/page.jsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { URL } from '@/config';
 
-export default function ProductForm({ product = null, onCancel, onSuccess }) {
-  const [products, setProducts] = useState([]);
-  const [selectedName, setSelectedName] = useState('');
-  const [unitPrice, setUnitPrice] = useState('');
+export default function CatalogForm({ catalogItem, onCancel, onSuccess }) {
+  const [formData, setFormData] = useState({
+    product_name: '',
+    unit_price: 0,
+  });
+
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState(null);
 
-  // ✅ Fetch all products from /product
+  // Ensure the form resets when catalogItem changes (important when reusing the modal)
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const res = await axios.get(`${URL}/product`);
-        setProducts(res.data.products); // Assuming the response is { products: [...] }
-      } catch (err) {
-        setError('Failed to load products');
-      }
-    };
+    setFormData({
+      product_name: catalogItem?.product_name || '',
+      unit_price: catalogItem?.unit_price || 0,
+    });
+  }, [catalogItem]);
 
-    fetchProducts();
-  }, []);
-
-  // ✅ Pre-fill fields if editing an existing catalog product
-  useEffect(() => {
-    if (product && products.length > 0) {
-      const matched = products.find((p) => p.id === product.product_id);
-      setSelectedName(matched?.name || '');
-      setUnitPrice(product.unit_price);
-    }
-  }, [product, products]);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: name === 'unit_price' ? parseFloat(value) || 0 : value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-
-    const selectedProduct = products.find((p) => p.name === selectedName);
-    if (!selectedProduct) {
-      setError('Please select a valid product name.');
-      return;
-    }
+    setLoading(true);
+    setError(null);
 
     try {
-      setLoading(true);
       const payload = {
-        product_id: selectedProduct.id,
-        unit_price: Number(unitPrice),
+        product_name: formData.product_name,
+        unit_price: formData.unit_price,
       };
 
-      if (product) {
-        await axios.put(`${URL}/catalog/${product.id}`, payload);
+      if (catalogItem) {
+        await axios.put(`${URL}/catalog/${catalogItem.id}`, payload);
       } else {
         await axios.post(`${URL}/catalog`, payload);
       }
 
       onSuccess();
     } catch (err) {
-      setError('Failed to save catalog item.');
+      setError(err.response?.data?.message || 'Failed to save catalog item.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mt-8">
-      <h3 className="text-lg font-semibold mb-4">{product ? 'Edit' : 'Add'} Catalog Item</h3>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
+        <div className="p-6">
+          <h2 className="text-xl font-semibold mb-4">
+            {catalogItem ? 'Edit Catalog Item' : 'Add New Catalog Item'}
+          </h2>
 
-      {error && <p className="text-red-500 mb-3">{error}</p>}
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
+              {error}
+            </div>
+          )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Product Name Select */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Product Name</label>
-          <select
-            value={selectedName}
-            onChange={(e) => setSelectedName(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-            required
-          >
-            <option value="">Select a product</option>
-            {products.map((p) => (
-              <option key={p.id} value={p.name}>
-                {p.name}
-              </option>
-            ))}
-          </select>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Product Name
+              </label>
+              <input
+                type="text"
+                name="product_name"
+                value={formData.product_name}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Unit Price (XAF)
+              </label>
+              <input
+                type="number"
+                name="unit_price"
+                min="0"
+                step="1"
+                value={formData.unit_price}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+
+            <div className="flex justify-end space-x-3 pt-4">
+              <button
+                type="button"
+                onClick={onCancel}
+                className="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100"
+                disabled={loading}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
+                disabled={loading}
+              >
+                {loading ? 'Saving...' : 'Save Item'}
+              </button>
+            </div>
+          </form>
         </div>
-
-        {/* Unit Price */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Unit Price</label>
-          <input
-            type="number"
-            value={unitPrice}
-            onChange={(e) => setUnitPrice(e.target.value)}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-            required
-          />
-        </div>
-
-        {/* Form Actions */}
-        <div className="flex justify-end space-x-2">
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-          >
-            {loading ? 'Saving...' : product ? 'Update' : 'Create'}
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

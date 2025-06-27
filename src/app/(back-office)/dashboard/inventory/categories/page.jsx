@@ -68,7 +68,7 @@ export default function CategoryList() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-6">
+    <div className="max-w-8xl mx-auto  p-6">
       <div className="bg-white rounded-lg shadow">
         <div className="p-4 border-b flex justify-between items-center">
           <h2 className="text-2xl font-semibold text-gray-800">Categories List</h2>
@@ -115,7 +115,7 @@ export default function CategoryList() {
 
         {!loading && !error && categories.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
               {categories.map((category) => (
                 <div key={category.id} className="bg-gray-50 rounded-lg p-6 border">
                   <div className="flex justify-between items-start mb-4">

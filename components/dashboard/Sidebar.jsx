@@ -1,222 +1,175 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import SubscribtionCard from '../SubscribtionCard';
 import SideBarDropdownLink from './SideBarDropdownLink';
-import CollapsibleLink from './CollapsibleLink';
-
 import {
   ShoppingCart,
   Home,
   BaggageClaim,
   ShoppingBag,
   ShoppingBasket,
-  Cable,
-  BarChart,
   Files,
+  LogOut,
+  Boxes,
   ChevronLeft,
   ChevronRight,
-  PlusCircle
+  LineChart,
+  BarChart3
 } from 'lucide-react';
-import SubscriptionCard from '../SubscribtionCard';
 
 const Sidebar = () => {
   const inventoryLinks = [
-    {
-      title: "Items",
-      href: "/dashboard/inventory/items", 
-    },
-    {
-      title: "categories",
-      href: "/dashboard/inventory/categories", 
-    },
-    {
-      title: "vendors",
-      href: "/dashboard/inventory/brands", 
-    },
-    {
-      title: "units",
-      href: "/dashboard/inventory/units/new", 
-    },
-    {
-      title: "warehouse",
-      href: "/dashboard/inventory/warehouse/new", 
-    },
-    {
-      title: "Catalogue",
-      href: "/dashboard/inventory/catalogue", 
-    },
+    { title: "Products", href: "/dashboard/inventory/items" },
+    { title: "Categories", href: "/dashboard/inventory/categories" },
+    { title: "Vendors", href: "/dashboard/inventory/brands" },
+    { title: "Units", href: "/dashboard/inventory/units/new" },
+    { title: "Warehouse", href: "/dashboard/inventory/warehouse/new" },
+    { title: "Catalogue", href: "/dashboard/inventory/catalogue" },
   ];
 
   const salesLinks = [
-    {
-      title: "customers",
-      href: "/dashboard/sales/customers/new", 
-    },
-    {
-      title: "Sales",
-      href: "/dashboard/sales", 
-    },
-   
-  
-    {
-      title: "reciets and payments",
-      href: "#", 
-    },
-    {
-      title: "payment recieved",
-      href: "#", 
-    },
-    {
-      title: "sales returns",
-      href: "#", 
-    },
-
-
-    
+    { title: "Customers", href: "/dashboard/sales/customers/new" },
+    { title: "Sales", href: "/dashboard/sales" },
+    { title: "Receipts & Payments", href: "#" },
+    { title: "Payment Received", href: "#" },
+    { title: "Sales Returns", href: "#" },
   ];
 
   const [collapsed, setCollapsed] = useState(false);
+  const [activeMenu, setActiveMenu] = useState('');
 
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
+    // Close any open menus when collapsing
+    if (!collapsed) setActiveMenu('');
+  };
+
+  const toggleMenu = (menu) => {
+    setActiveMenu(activeMenu === menu ? '' : menu);
   };
 
   return (
     <div
-      className={`overflow-y-auto  bg-gradient-to-b from-slate-950
-         via-slate-900 to-slate-700 
-        text-slate-50 
-        transition-all duration-500  relative overflow-hidden ${
-        collapsed ? 'w-20' : 'w-94'
-      }`}
+      className={`fixed h-screen top-0 left-0 z-50
+        bg-gradient-to-b from-slate-950 via-slate-900 to-slate-700 
+        text-slate-50 transition-all duration-300 ease-in-out
+        ${collapsed ? 'w-38' : 'w-64 shadow-xl'}`}
     >
       {/* Animated background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10
-       via-transparent to-purple-900/10 animate-pulse"></div>
-      
-      {/* Subtle animated border */}
-      <div className="absolute right-0 top-0 bottom-0 w-0.5 bg-gradient-to-b 
-      from-blue-500/50 via-purple-500/50 to-cyan-500/50 animate-pulse"></div>
+      <div className="absolute inset-0 bg-gradient-to-br 
+        from-blue-900/10 via-transparent to-purple-900/10 animate-pulse" />
 
-      {/* Top section - Logo and Navigation */}
-      <div className="flex flex-col relative z-10">
-        {/* Logo */}
+      {/* Collapse button at top for better accessibility */}
+      <button
+        onClick={toggleCollapse}
+        className="absolute -right-3 top-6 z-50 w-6 h-6 rounded-full
+        bg-gradient-to-br from-blue-600 to-purple-600 shadow-md
+        flex items-center justify-center text-white hover:scale-110
+        transition-all duration-200 transform"
+      >
+        {collapsed ? (
+          <ChevronRight className="w-4 h-4" />
+        ) : (
+          <ChevronLeft className="w-4 h-4" />
+        )}
+      </button>
+
+      {/* Main sidebar content */}
+      <div className="flex flex-col h-full relative z-10">
+        {/* Logo section */}
         <Link
           href="#"
-          className="bg-gradient-to-r from-slate-950 to-slate-900 
-          flex items-center space-x-2 py-6 px-4 border-b border-slate-700/50 
-          hover:from-blue-950 hover:to-slate-900 transition-all duration-300 group"
+          className={`flex items-center py-5 px-4 border-b border-slate-700/50 
+          transition-all duration-300 group ${
+            collapsed ? 'justify-center' : 'justify-start'
+          }`}
         >
           <div className="relative">
             <BaggageClaim className="w-6 h-6 text-blue-400 group-hover:text-blue-300 transition-colors duration-300" />
-            <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-sm group-hover:bg-blue-300/30 transition-all duration-300"></div>
+            <div className="absolute inset-0 bg-blue-400/20 rounded-full blur-sm group-hover:bg-blue-300/30 transition-all duration-300" />
           </div>
           {!collapsed && (
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-300 
-            to-cyan-300 bg-clip-text text-transparent group-hover:from-blue-200 
-            group-hover:to-cyan-200 transition-all duration-300">
+            <span className="ml-3 text-xl font-bold bg-gradient-to-r from-blue-300 
+              to-cyan-300 bg-clip-text text-transparent group-hover:from-blue-200 
+              group-hover:to-cyan-200 transition-all duration-300">
               SAASZ
             </span>
           )}
         </Link>
 
-        {/* Navigation Links */}
-        <nav className="flex flex-col gap-1 py-6 px-3">
-          {/* Home link - Active state */}
+        {/* Navigation links - scrollable area */}
+        <nav className="flex-1 overflow-y-auto py-4 px-2 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-slate-800">
+          {/* Home link */}
           <Link
             href="#"
-            className="flex items-center space-x-3 bg-gradient-to-r
-             from-blue-600 to-blue-500 text-white py-3 px-4 rounded-xl shadow-lg shadow-blue-500/25 
-             hover:shadow-blue-500/40 hover:from-blue-500 hover:to-blue-400 
-             transition-all duration-300 transform hover:scale-[1.02] group"
+            className={`flex items-center rounded-lg mx-2 p-3 transition-all duration-200
+              bg-gradient-to-r from-blue-600 to-blue-500 text-white
+              hover:from-blue-500 hover:to-blue-400 hover:shadow-lg
+              ${collapsed ? 'justify-center' : 'justify-between'}`}
           >
-            <Home className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-            {!collapsed && <span className="font-medium">Home</span>}
-            {!collapsed && <div className="ml-auto w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>}
+            <div className="flex items-center">
+              <Home className="w-5 h-5" />
+              {!collapsed && <span className="ml-3 font-medium">Home</span>}
+            </div>
+            {!collapsed && <div className="w-2 h-2 bg-white/60 rounded-full animate-pulse" />}
           </Link>
 
-          {/* Dropdown Links with enhanced styling */}
-          <div className="space-y-1">
-            <SideBarDropdownLink 
-              items={inventoryLinks} 
-              title="Inventory"
-              icon={BaggageClaim} 
-            />
-            
-            <SideBarDropdownLink 
-              items={salesLinks} 
-              title="sales"
-              icon={ShoppingBasket} 
-            />
-          </div>
+          {/* Inventory dropdown */}
+          <SideBarDropdownLink
+            items={inventoryLinks}
+            title="Inventory"
+            icon={BaggageClaim}
+            collapsed={collapsed}
+            active={activeMenu === 'inventory'}
+            onClick={() => toggleMenu('inventory')}
+          />
 
-          {/* Enhanced Navigation Items */}
-          <div className="space-y-1 mt-2">
-            <Link
+          {/* Sales dropdown */}
+          <SideBarDropdownLink
+            items={salesLinks}
+            title="Sales"
+            icon={ShoppingBasket}
+            collapsed={collapsed}
+            active={activeMenu === 'sales'}
+            onClick={() => toggleMenu('sales')}
+          />
 
-            href="/dashboard/purchases"
-             className="flex items-center space-x-3 py-3 px-4
-             hover:bg-gradient-to-r hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300 w-full text-left group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1">
-              <ShoppingBag className="w-5 h-5 text-slate-400 group-hover:text-emerald-400
-               transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-emerald-300
-               transition-colors duration-300">Purchases</span>}
-            </Link>
-
-           
-
-            <Link
-              href="/dashboard/reports"
-              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300 group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
-            >
-              <BarChart className="w-5 h-5 text-slate-400 group-hover:text-yellow-400 transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-yellow-300 transition-colors duration-300">Reports</span>}
-            </Link>
-
-           
-
-            <Link
-              href="#"
-              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300 group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
-            >
-              <Files className="w-5 h-5 text-slate-400 group-hover:text-cyan-400 
-              transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-cyan-300 transition-colors
-               duration-300">Catalogue</span>}
-            </Link>
-
-            <Link
-              href="#"
-              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300 group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
-            >
-              <Files className="w-5 h-5 text-slate-400 group-hover:text-pink-400 transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-pink-300 transition-colors duration-300">Vendors</span>}
-            </Link>
+          {/* Other links */}
+          <div className="mt-2 space-y-1">
+            {[
+              { title: "Catalog", href: "/dashboard/cata", icon: Boxes },
+              { title: "Purchase", href: "/dashboard/reports", icon: ShoppingBag },
+              { title: "Sale", href: "/dashboard/sales", icon: Files },
+              { title: "Inventory Dashboard", href: "/dashboard/analysis", icon: LineChart },
+              { title: "Block Overview", href: "/dashboards/Analytics", icon: BarChart3 },
+            ].map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={`flex items-center rounded-lg mx-2 p-3 transition-all duration-200
+                  hover:bg-slate-800/50 hover:text-blue-300
+                  ${collapsed ? 'justify-center' : 'pl-4'}`}
+              >
+                <item.icon className="w-5 h-5 text-slate-400" />
+                {!collapsed && <span className="ml-3">{item.title}</span>}
+              </Link>
+            ))}
           </div>
         </nav>
-      </div>
 
-      {/* Bottom - Enhanced Collapse button */}
-      <div className="px-4 py-6 mt-auto relative z-10">
-        <button
-          onClick={toggleCollapse}
-          className="flex items-center justify-center space-x-2 bg-gradient-to-r from-slate-800 to-slate-700 hover:from-slate-700 hover:to-slate-600 px-4 py-3 rounded-xl w-full border border-slate-600/50 hover:border-slate-500/50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 group"
-        >
-          {collapsed ? (
-            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5" />
-          ) : (
-            <>
-              <ChevronLeft className="w-5 h-5 text-slate-300 group-hover:text-white transition-all duration-300 group-hover:-translate-x-0.5" />
-              <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors duration-300">Collapse</span>
-            </>
-          )}
-        </button>
+        {/* Logout button */}
+        <div className="px-4 py-4 border-t border-slate-700/50">
+          <Link
+            href="#"
+            className={`flex items-center rounded-lg p-3 transition-all duration-200
+              hover:bg-slate-800/50 hover:text-red-400
+              ${collapsed ? 'justify-center' : 'pl-4'}`}
+          >
+            <LogOut className="w-5 h-5 text-slate-400" />
+            {!collapsed && <span className="ml-3">Logout</span>}
+          </Link>
+        </div>
       </div>
-
-      {/* Floating gradient orbs for ambient effect */}
-      <div className="absolute top-1/4 -left-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 -right-4 w-20 h-20 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
     </div>
   );
 };

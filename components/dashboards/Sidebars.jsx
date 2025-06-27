@@ -19,14 +19,19 @@ import {
   ChevronLeft,
   Leaf,
   Users,
-  
+  LogOut,
+  Package,
+  CalendarClock,
+  Layout,
+  Layers2,
+  User,
   BlocksIcon,
-  
   GroupIcon,
   ClockAlert,
   payment,
   ChevronRight,
-  PlusCircle
+  PlusCircle,
+
 } from 'lucide-react';
 import SubscriptionCard from '../SubscribtionCard';
 
@@ -55,11 +60,10 @@ const Sidebars = () => {
 
   return (
     <div
-      className={`overflow-y-auto  bg-gradient-to-b from-slate-950
-         via-slate-900 to-slate-700 
-        text-slate-50 
-        transition-all duration-500  relative overflow-hidden ${
-        collapsed ? 'w-20' : 'w-94'
+      className={`fixed h-screen top-0 left-0 z-50
+        bg-gradient-to-b from-slate-950 overflow-y-auto via-slate-900 to-slate-700 
+        text-slate-50 transition-all duration-300 ${
+        collapsed ? 'w-30' : 'w-69'
       }`}
     >
       {/* Animated background gradient overlay */}
@@ -182,9 +186,9 @@ const Sidebars = () => {
               hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
                group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
             >
-              <GroupIcon className="w-5 h-5 text-slate-400 group-hover:text-pink-400 
+              <GroupIcon className="w-5 h-5 text-slate-400 group-hover:text-blue-700 
               transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-pink-300 transition-colors
+              {!collapsed && <span className="group-hover:text-green-600 transition-colors
                duration-300">Teams</span>}
             </Link>
 
@@ -194,33 +198,58 @@ const Sidebars = () => {
               hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
                group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
             >
-              <Users className="w-5 h-5 text-slate-400 group-hover:text-pink-400 
+              <CalendarClock className="w-5 h-5 text-slate-400 group-hover:text-yellow-600 
               transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-pink-300 transition-colors
+              {!collapsed && <span className="group-hover:text-blue-300 transition-colors
                duration-300">sessions period</span>}
             </Link>
              <Link
-              href="/dashboards/session materials"
+              href="/dashboards/sessionMaterials"
               className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
               hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
                group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
             >
-              <Files className="w-5 h-5 text-slate-400 group-hover:text-pink-400 
+              <Package className="w-5 h-5 text-slate-400 group-hover:text-purple-600 
+              transition-colors duration-300" />
+              {!collapsed && <span className="group-hover:text-green-300 transition-colors
+               duration-300">Session Materials</span>}
+            </Link>
+
+
+              <Link
+              href="/dashboards/sessionMaterials"
+              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
+              hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
+               group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
+            >
+              <Layers2 className="w-5 h-5 text-slate-400 group-hover:text-pink-400 
               transition-colors duration-300" />
               {!collapsed && <span className="group-hover:text-pink-300 transition-colors
                duration-300">Session Materials</span>}
             </Link>
 
             <Link
-              href="/dashboards/session products"
+              href="/dashboards/sessionProduct"
               className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
               hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
                group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
             >
-              <Files className="w-5 h-5 text-slate-400 group-hover:text-pink-400 
+              <Layout className="w-5 h-5 text-slate-400 group-hover:text-blue-400 
               transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-pink-300 transition-colors
+              {!collapsed && <span className="group-hover:text-yellow-300 transition-colors
                duration-300">Session Products</span>}
+            </Link>
+
+             <Link
+              href="#"
+              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
+              hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
+               group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
+            >
+              <LogOut className="w-5 h-5 text-slate-400 group-hover:text-red-400 
+              transition-colors duration-300" />
+              {!collapsed && <span className="group-hover:text-green-300 transition-colors
+               duration-300">LogOut</span>}
             </Link>
 
 

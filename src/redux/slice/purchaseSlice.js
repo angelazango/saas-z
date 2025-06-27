@@ -36,6 +36,19 @@ const purchaseSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    deletePurchaseStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    deletePurchaseSuccess: (state, action) => {
+      state.loading = false;
+      state.purchases = state.purchases.filter(p => p.id !== action.payload);
+      state.error = null;
+    },
+    deletePurchaseFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -46,6 +59,9 @@ export const {
   createPurchaseStart,
   createPurchaseSuccess,
   createPurchaseFailure,
+  deletePurchaseStart,
+  deletePurchaseSuccess,
+  deletePurchaseFailure,
 } = purchaseSlice.actions;
 
 export default purchaseSlice.reducer;

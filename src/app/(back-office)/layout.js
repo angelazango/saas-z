@@ -8,22 +8,17 @@ import Sidebar from "../../../components/dashboard/Sidebar";
 import { Provider } from "react-redux";
 import store from "@/src/redux/store";
 
-export default function Layout 
-
- ({ children }) {
+export default function Layout({ children }) {
   return (
-      <Provider store={store}>
+    <Provider store={store}>
       <div className="flex">
-       <Sidebar />
-        <main className="w-full 
-         bg-slate-100
-         min-h-screen">
-             <Header />
-             <HomeNav/>
-             { children }
+        <Sidebar />
+        <main className="flex-1 bg-slate-100 min-h-screen ml-64"> {/* Adjust margin to match sidebar width */}
+          <Header />
+          <HomeNav />
+          {children}
         </main>
       </div>
- </Provider>
+    </Provider>
   );
-
 }

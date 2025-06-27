@@ -6,14 +6,12 @@ import { usePathname } from 'next/navigation';
 
 export default function HomeNav() {
   const pathname = usePathname();
-
   const navLinks = [
     { title: 'Dashboard', href: '/dashboard/home/overview' },
     { title: 'Getting Started', href: '/dashboard/home/getting-started' },
-    { title: 'Recent Updates', href: '/dashboard/home/updates' },
+    { title: 'Recent Updates', href: '/dashboard/home/updates'},
     { title: 'Announcements', href: '/dashboard/home/announcements' },
   ];
- 
   return (
     <div className="h-32 p-5 bg-slate-50 border-b border-slate-300   ">
       <div className="flex space-x-3 ">
@@ -23,13 +21,14 @@ export default function HomeNav() {
           </div>
           <div className="flex flex-col ml-3">
             <p className="font-semibold text-slate-700">
-              Hello, Angela WEB DEVELOPER
+              Admin, Angela C.
             </p>
             <span className="text-orange">SAAS-Z</span>
           </div>
         </div>
       </div>
-      <nav className="sticky  transition-all duration-300 mt-6 flex space-x-4 border-b border-slate-200">
+      <nav className="sticky top-0 z-0 transition-all duration-300 mt-6 flex 
+      space-x-4 border-b border-slate-200">
         {navLinks.map((item, i) => (
           <Link
             prefetch={true}

@@ -1,3 +1,6 @@
+// src/redux/slice/catalogSlice.js
+
+
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
@@ -23,49 +26,29 @@ const catalogSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    addProductStart: (state) => {
+    createCatalogItemStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    addProductSuccess: (state, action) => {
+    createCatalogItemSuccess: (state, action) => {
       state.loading = false;
       state.catalog.push(action.payload);
       state.error = null;
     },
-    addProductFailure: (state, action) => {
+    createCatalogItemFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
-    updateProductStart: (state) => {
+    deleteCatalogItemStart: (state) => {
       state.loading = true;
       state.error = null;
     },
-    updateProductSuccess: (state, action) => {
+    deleteCatalogItemSuccess: (state, action) => {
       state.loading = false;
-      const index = state.catalog.findIndex(
-        product => product.product_id === action.payload.product_id
-      );
-      if (index !== -1) {
-        state.catalog[index] = action.payload;
-      }
+      state.catalog = state.catalog.filter(item => item.id !== action.payload);
       state.error = null;
     },
-    updateProductFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    deleteProductStart: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    deleteProductSuccess: (state, action) => {
-      state.loading = false;
-      state.catalog = state.catalog.filter(
-        product => product.product_id !== action.payload
-      );
-      state.error = null;
-    },
-    deleteProductFailure: (state, action) => {
+    deleteCatalogItemFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -76,15 +59,12 @@ export const {
   fetchCatalogStart,
   fetchCatalogSuccess,
   fetchCatalogFailure,
-  addProductStart,
-  addProductSuccess,
-  addProductFailure,
-  updateProductStart,
-  updateProductSuccess,
-  updateProductFailure,
-  deleteProductStart,
-  deleteProductSuccess,
-  deleteProductFailure,
+  createCatalogItemStart,
+  createCatalogItemSuccess,
+  createCatalogItemFailure,
+  deleteCatalogItemStart,
+  deleteCatalogItemSuccess,
+  deleteCatalogItemFailure,
 } = catalogSlice.actions;
 
 export default catalogSlice.reducer;

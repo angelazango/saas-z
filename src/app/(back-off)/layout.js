@@ -14,16 +14,13 @@ export default function Layout({children}) {
 
 <div className="flex">
        <Sidebars />
-        <main className="w-full 
-         bg-slate-100
-         min-h-screen">
+        <main className="flex-1 bg-slate-100 min-h-screen ml-64">
              <Header />
              {/* <HomeNav /> */}
              { children }
         </main>
       </div>
  
-       {children} 
     </div> 
   )
 }

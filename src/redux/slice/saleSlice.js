@@ -1,63 +1,96 @@
-// slice/saleSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  sales: [],       // Array to store sales data
-  loading: false,  // For loading state
-  error: null,     // For error tracking
-  success: false,  // For success tracking
+  sales: [],
+  loading: false,
+  error: null,
 };
 
-const salesSlice = createSlice({
-  name: 'sales',
+const saleSlice = createSlice({
+  name: 'sale',
   initialState,
   reducers: {
-    // Post sale actions
-    postSaleStart: (state) => {
-      state.loading = true;
-      state.error = null;
-      state.success = false;
-    },
-    postSaleSuccess: (state, action) => {
-      state.loading = false;
-      state.sales.unshift(action.payload); // Add new sale to beginning
-      state.success = true;
-    },
-    postSaleFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-      state.success = false;
-    },
-    // Fetch sales actions
     fetchSalesStart: (state) => {
       state.loading = true;
       state.error = null;
     },
     fetchSalesSuccess: (state, action) => {
       state.loading = false;
-      state.sales = action.payload;
+      state.sales = action.payload.map(sale => ({
+        ...sale,
+        // Store date as ISO string instead of Date object
+        date: sale.date ? new Date(sale.date).toISOString() : null
+      }));
+      state.error = null;
     },
     fetchSalesFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
-    // Reset state
-    resetSalesState: (state) => {
-      state.loading = false;
+    createSaleStart: (state) => {
+      state.loading = true;
       state.error = null;
-      state.success = false;
-    }
+    },
+    createSaleSuccess: (state, action) => {
+      state.loading = false;
+      state.sales.push({
+        ...action.payload,
+        date: action.payload.date ? new Date(action.payload.date).toISOString() : null
+      });
+      state.error = null;
+    },
+    createSaleFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    updateSaleStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    updateSaleSuccess: (state, action) => {
+      state.loading = false;
+      const index = state.sales.findIndex(s => s.id === action.payload.id);
+      if (index !== -1) {
+        state.sales[index] = {
+          ...action.payload,
+          date: action.payload.date ? new Date(action.payload.date).toISOString() : null
+        };
+      }
+      state.error = null;
+    },
+    updateSaleFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    deleteSaleStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteSaleSuccess: (state, action) => {
+      state.loading = false;
+      state.sales = state.sales.filter(s => s.id !== action.payload);
+      state.error = null;
+    },
+    deleteSaleFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
 export const {
-  postSaleStart,
-  postSaleSuccess,
-  postSaleFailure,
   fetchSalesStart,
   fetchSalesSuccess,
   fetchSalesFailure,
-  resetSalesState
-} = salesSlice.actions;
+  createSaleStart,
+  createSaleSuccess,
+  createSaleFailure,
+  updateSaleStart,
+  updateSaleSuccess,
+  updateSaleFailure,
+  deleteSaleStart,
+  deleteSaleSuccess,
+  deleteSaleFailure,
+} = saleSlice.actions;
 
-export default salesSlice.reducer;
+export default saleSlice.reducer;

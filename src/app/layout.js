@@ -2,8 +2,6 @@
 import "./globals.css";
 import "./styles/main.scss";
 import { ReduxProvider } from "./providers";
-
-
 export const metadata = {
   title: "SAAS-Z",
   description: "SAAS Platform",

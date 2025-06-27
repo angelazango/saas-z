@@ -47,7 +47,7 @@ export default function VendorList() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto mt-10 p-6">
+    <div className="max-w-9xl mx-auto  p-6">
       <div className="bg-white rounded-lg shadow">
         <div className="p-4 border-b flex justify-between items-center">
           <h2 className="text-2xl font-semibold text-gray-800">Vendors List</h2>
@@ -88,13 +88,13 @@ export default function VendorList() {
               className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
             >
               Add Your First Vendor
-            </button>
+            </button>s
           </div>
         )}
 
         {!loading && !error && vendors.length > 0 && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+            <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
               {vendors.map((vendor) => (
                 <div key={vendor.id} className="bg-gray-50 rounded-lg p-6 border">
                   <div className="flex justify-between items-start mb-4">
