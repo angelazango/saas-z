@@ -240,6 +240,18 @@ const Sidebars = () => {
                duration-300">Session Products</span>}
             </Link>
 
+              <Link
+              href="/dashboard/inventory"
+              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
+              hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
+               group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
+            >
+              <Layout className="w-5 h-5 text-slate-400 group-hover:text-blue-400 
+              transition-colors duration-300" />
+              {!collapsed && <span className="group-hover:text-pink-600 transition-colors
+               duration-300">Inventory overview</span>}
+            </Link>
+
              <Link
               href="#"
               className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
@@ -262,22 +274,30 @@ const Sidebars = () => {
       <div className="px-4 py-6 mt-auto relative z-10">
         <button
           onClick={toggleCollapse}
-          className="flex items-center justify-center space-x-2 bg-gradient-to-r from-slate-800 to-slate-700 hover:from-slate-700 hover:to-slate-600 px-4 py-3 rounded-xl w-full border border-slate-600/50 hover:border-slate-500/50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 group"
+          className="flex items-center justify-center space-x-2 bg-gradient-to-r 
+          from-slate-800 to-slate-700 hover:from-slate-700 hover:to-slate-600 px-4 py-3
+           rounded-xl w-full border border-slate-600/50 hover:border-slate-500/50 transition-all
+            duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 group"
         >
           {collapsed ? (
-            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white transition-all duration-300 group-hover:translate-x-0.5" />
+            <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-white
+             transition-all duration-300 group-hover:translate-x-0.5" />
           ) : (
             <>
-              <ChevronLeft className="w-5 h-5 text-slate-300 group-hover:text-white transition-all duration-300 group-hover:-translate-x-0.5" />
-              <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors duration-300">Collapse</span>
+              <ChevronLeft className="w-5 h-5 text-slate-300 group-hover:text-white 
+              transition-all duration-300 group-hover:-translate-x-0.5" />
+              <span className="text-sm font-medium text-slate-300 group-hover:text-white 
+              transition-colors duration-300">Collapse</span>
             </>
           )}
         </button>
       </div>
 
       {/* Floating gradient orbs for ambient effect */}
-      <div className="absolute top-1/4 -left-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 -right-4 w-20 h-20 bg-purple-500/10 rounded-full blur-xl animate-pulse delay-1000"></div>
+      <div className="absolute top-1/4 -left-4 w-24 h-24 bg-blue-500/10 rounded-full
+       blur-xl animate-pulse"></div>
+      <div className="absolute bottom-1/3 -right-4 w-20 h-20 bg-purple-500/10 rounded-full 
+      blur-xl animate-pulse delay-1000"></div>
     </div>
   );
 };
