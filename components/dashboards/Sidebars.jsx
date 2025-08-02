@@ -63,7 +63,7 @@ const Sidebars = () => {
       className={`fixed h-screen top-0 left-0 z-50
         bg-gradient-to-b from-slate-950 overflow-y-auto via-slate-900 to-slate-700 
         text-slate-50 transition-all duration-300 ${
-        collapsed ? 'w-30' : 'w-69'
+        collapsed ? 'w-65' : 'w-67'
       }`}
     >
       {/* Animated background gradient overlay */}

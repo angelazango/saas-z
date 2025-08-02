@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from 'axios';
@@ -53,27 +54,29 @@ export default function SessionMaterialForm({ onCancel, onSuccess }) {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setError(null);
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError(null);
 
-  try {
-    dispatch(createSessionMaterialStart());
-    
-    // 1. Make the POST request
-    await axios.post(`${URL}/blocks/session/material`, formData);
-    
-    // 2. Immediately refetch all materials instead of trying to add to state
-    onSuccess(); // This triggers fetchSessionMaterials()
-    
-  } catch (err) {
-    const errorMessage = err.response?.data?.message || 'Failed to record session material';
-    setError(errorMessage);
-    dispatch(createSessionMaterialFailure(errorMessage));
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+    try {
+      dispatch(createSessionMaterialStart());
+      
+      // Format the date properly before sending
+      const payload = {
+        ...formData,
+        date: new Date(formData.date).toISOString().split('T')[0]
+      };
+      
+      await axios.post(`${URL}/blocks/session/material`, payload);
+      onSuccess();
+    } catch (err) {
+      const errorMessage = err.response?.data?.message || 'Failed to record session material';
+      setError(errorMessage);
+      dispatch(createSessionMaterialFailure(errorMessage));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 backdrop-blur rounded-2xl shadow-lg flex items-center justify-center z-50">
@@ -84,6 +87,7 @@ export default function SessionMaterialForm({ onCancel, onSuccess }) {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Form fields remain the same as before */}
           <div>
             <label className="block text-sm font-medium mb-1">Session *</label>
             <select

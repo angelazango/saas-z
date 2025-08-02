@@ -2,7 +2,6 @@
 'use client';
 
 import React from 'react';
-
 const SalesSummary = ({ sales }) => {
   const calculateStats = () => {
     let totalRevenue = 0;

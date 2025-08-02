@@ -130,7 +130,7 @@ export default function SessionList() {
                       <td className="px-6 py-4">
                         <div className="text-sm text-gray-500">{session.description}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <button
                           onClick={() => handleEditSession(session)}
                           className="text-blue-600 hover:text-blue-900 mr-4"

@@ -1,27 +1,46 @@
 {
   "products": [
+
+
+
+       {
+      "id": 15,
+      "name": "Screws Assortment",
+      "category": "Fasteners",
+      "price": 6.99,
+      "image": "/images/assortment.jpg",
+      "description": "1 lb. Assorted Screws"
+    },
     {
       "id": 1,
-      "name": "Cordless Drill",
-      "category": "Power Tools",
-      "price": 89.99,
-      "image": "/products/cartoon.jpg",
+      "name": "Iron rod",
+      "category": "Construction",
+      "price": 1200,
+      "image": "/images/rod.jpeg",
       "description": "20V MAX Lithium-Ion Cordless Drill/Driver Kit"
+    },
+     {
+      "id": 60,
+      "name": "Cement",
+      "category": "Construction",
+      "price": 25000,
+      "image": "/images/cements.jpg",
+      "description": "Heavy Duty Steel Workbench with Drawer"
     },
     {
       "id": 2,
       "name": "Hammer",
       "category": "Hand Tools",
-      "price": 12.99,
-      "image": "/products/hammer.jpg",
+      "price": 1000,
+      "image": "/images/ham.jpg",
       "description": "16 oz. Curved Claw Hammer with Fiberglass Handle"
     },
     {
       "id": 3,
       "name": "Screwdriver Set",
       "category": "Hand Tools",
-      "price": 24.99,
-      "image": "/products/screwdrivers.jpg",
+      "price": 2000,
+      "image": "/images/screws.jpeg",
       "description": "15-Piece Magnetic Screwdriver Set"
     },
     {
@@ -29,23 +48,23 @@
       "name": "Circular Saw",
       "category": "Power Tools",
       "price": 119.99,
-      "image": "/products/circular-saw.jpg",
+      "image": "/images/saw.png",
       "description": "15 Amp 7-1/4 in. Circular Saw with Laser Guide"
     },
     {
       "id": 5,
       "name": "Paint Brush Set",
       "category": "Painting Supplies",
-      "price": 14.99,
-      "image": "/products/paint-brushes.jpg",
+      "price": 1000,
+      "image": "/images/knife.jpeg",
       "description": "10-Piece Premium Paint Brush Set"
     },
     {
       "id": 6,
       "name": "Ladder",
       "category": "Safety Equipment",
-      "price": 149.99,
-      "image": "/products/ladder.jpg",
+      "price": 2000,
+      "image": "/images/ladder.png",
       "description": "6 ft. Fiberglass Step Ladder with 300 lb. Load Capacity"
     },
     {
@@ -53,192 +72,401 @@
       "name": "Wrench Set",
       "category": "Hand Tools",
       "price": 39.99,
-      "image": "/products/wrenches.jpg",
+      "image": "/images/wrench set.jpg",
       "description": "10-Piece Combination Wrench Set"
     },
     {
       "id": 8,
       "name": "Safety Glasses",
       "category": "Safety Equipment",
-      "price": 8.99,
-      "image": "/products/safety-glasses.jpg",
+      "price": 5000,
+      "image": "/images/glassses.jpeg",
       "description": "Clear Anti-Fog Safety Glasses"
     },
     {
       "id": 9,
       "name": "Measuring Tape",
       "category": "Measuring Tools",
-      "price": 12.49,
-      "image": "/products/tape-measure.jpg",
+      "price": 1300,
+      "image": "/images/tape.jpeg",
       "description": "25 ft. Auto-Lock Tape Measure"
     },
     {
       "id": 10,
       "name": "Work Gloves",
       "category": "Safety Equipment",
-      "price": 9.99,
-      "image": "/products/work-gloves.jpg",
+      "price": 500,
+      "image": "/images/gloves.jpeg",
       "description": "Pair of Heavy Duty Work Gloves"
     },
     {
       "id": 11,
       "name": "Pliers Set",
       "category": "Hand Tools",
-      "price": 29.99,
-      "image": "/products/pliers.jpg",
+      "price": 2900,
+      "image": "/images/pliers.jpeg",
       "description": "5-Piece Pliers Set"
     },
     {
       "id": 12,
       "name": "Utility Knife",
       "category": "Hand Tools",
-      "price": 7.99,
-      "image": "/products/utility-knife.jpg",
+      "price": 4500,
+      "image": "/images/knife.jpeg",
       "description": "Retractable Utility Knife with 5 Blades"
     },
     {
       "id": 13,
       "name": "Level",
       "category": "Measuring Tools",
-      "price": 14.99,
-      "image": "/products/level.jpg",
+      "price": 2800,
+      "image": "/images/level.jpg",
       "description": "24 in. Aluminum Level"
     },
     {
       "id": 14,
       "name": "Nails Assortment",
       "category": "Fasteners",
-      "price": 5.99,
-      "image": "/products/nails.jpg",
+      "price": 2100,
+      "image": "/images/nail.jpg",
       "description": "1 lb. Assorted Nails"
     },
-    {
-      "id": 15,
-      "name": "Screws Assortment",
-      "category": "Fasteners",
-      "price": 6.99,
-      "image": "/products/screws.jpg",
-      "description": "1 lb. Assorted Screws"
-    },
+ 
     {
       "id": 16,
       "name": "Sandpaper Pack",
       "category": "Abrasives",
-      "price": 8.99,
-      "image": "/products/sandpaper.jpg",
+      "price": 2500,
+      "image": "/images/sand paper.jpeg",
       "description": "Variety Pack of 20 Sandpaper Sheets"
     },
     {
       "id": 17,
       "name": "Paint Roller Kit",
       "category": "Painting Supplies",
-      "price": 12.99,
-      "image": "/products/paint-roller.jpg",
+      "price": 2000,
+      "image": "/images/paint.jpeg",
       "description": "9 in. Paint Roller Kit with Tray"
     },
     {
       "id": 18,
       "name": "Caulk Gun",
       "category": "Sealants",
-      "price": 9.99,
-      "image": "/products/caulk-gun.jpg",
+      "price": 750,
+      "image": "/images/gun.jpeg",
       "description": "Heavy Duty Caulk Gun"
     },
     {
       "id": 19,
       "name": "Extension Cord",
       "category": "Electrical",
-      "price": 19.99,
-      "image": "/products/extension-cord.jpg",
+      "price": 600,
+      "image": "/images/cord.jpeg",
       "description": "50 ft. 16/3 Outdoor Extension Cord"
     },
     {
       "id": 20,
       "name": "Flashlight",
       "category": "Lighting",
-      "price": 14.99,
-      "image": "/products/flashlight.jpg",
+      "price": 500,
+      "image": "/images/light.jpeg",
       "description": "1000 Lumen LED Flashlight"
     },
     {
       "id": 21,
       "name": "Toolbox",
       "category": "Storage",
-      "price": 24.99,
-      "image": "/products/toolbox.jpg",
+      "price": 2400,
+      "image": "/images/tool.jpeg",
       "description": "16 in. Plastic Toolbox"
     },
     {
       "id": 22,
       "name": "Allen Wrench Set",
       "category": "Hand Tools",
-      "price": 12.99,
-      "image": "/products/allen-wrenches.jpg",
+      "price": 3000,
+      "image": "/images/wrench set.jpg",
       "description": "10-Piece Hex Key Set"
     },
     {
       "id": 23,
       "name": "Stud Finder",
       "category": "Measuring Tools",
-      "price": 19.99,
-      "image": "/products/stud-finder.jpg",
+      "price": 3000,
+      "image": "/images/stud.jpeg",
       "description": "Electronic Stud Finder"
     },
     {
       "id": 24,
       "name": "Putty Knife",
       "category": "Painting Supplies",
-      "price": 5.99,
-      "image": "/products/putty-knife.jpg",
+      "price": 5300,
+      "image": "/images/knife.jpeg",
       "description": "3 in. Putty Knife"
     },
     {
       "id": 25,
       "name": "Wire Cutters",
       "category": "Electrical",
-      "price": 11.99,
-      "image": "/products/wire-cutters.jpg",
+      "price": 4500,
+      "image": "/images/wire.jpeg",
       "description": "8 in. Diagonal Cutting Pliers"
     },
     {
       "id": 26,
       "name": "Hacksaw",
       "category": "Hand Tools",
-      "price": 14.99,
-      "image": "/products/hacksaw.jpg",
+      "price": 1400,
+      "image": "/images/circular saw.jpeg",
       "description": "10 in. Adjustable Hacksaw"
     },
     {
       "id": 27,
       "name": "Duct Tape",
       "category": "Adhesives",
-      "price": 4.99,
-      "image": "/products/duct-tape.jpg",
+      "price": 3000,
+      "image": "/images/tape.jpeg",
       "description": "60 yd. Heavy Duty Duct Tape"
     },
     {
       "id": 28,
       "name": "Wood Glue",
       "category": "Adhesives",
-      "price": 5.99,
-      "image": "/products/wood-glue.jpg",
+      "price": 5000,
+      "image": "/images/glue.png",
       "description": "16 oz. Waterproof Wood Glue"
     },
     {
       "id": 29,
       "name": "Safety Cone",
       "category": "Safety Equipment",
-      "price": 8.99,
-      "image": "/products/safety-cone.jpg",
+      "price": 2300,
+      "image": "/images/cone.webp",
       "description": "28 in. Orange Safety Cone"
     },
     {
       "id": 30,
       "name": "Broom",
       "category": "Cleaning Supplies",
-      "price": 12.99,
-      "image": "/products/broom.jpg",
+      "price": 1200,
+      "image": "/images/wood3.jpeg",
       "description": "Push Broom with 24 in. Head"
+    },
+    
+ 
+    {
+      "id": 31,
+      "name": "Angle Grinder",
+      "category": "Power Tools",
+      "price": 4500,
+      "image": "/images/grinder.webp",
+      "description": "4.5 in. Angle Grinder with Paddle Switch"
+    },
+    {
+      "id": 32,
+      "name": "Dust Mask",
+      "category": "Safety Equipment",
+      "price": 800,
+      "image": "/images/mask.jpeg",
+      "description": "Disposable Dust Mask, Pack of 10"
+    },
+    {
+      "id": 33,
+      "name": "Voltage Tester",
+      "category": "Electrical",
+      "price": 1500,
+      "image": "/images/tester.jpeg",
+      "description": "Non-Contact Voltage Tester Pen"
+    },
+    {
+      "id": 34,
+      "name": "Tile Cutter",
+      "category": "Hand Tools",
+      "price": 6700,
+      "image": "/images/tile.jpg",
+      "description": "Manual Tile Cutter for Ceramic and Porcelain"
+    },
+  
+    {
+      "id": 36,
+      "name": "Masonry Drill Bits",
+      "category": "Power Tools",
+      "price": 2900,
+      "image": "/images/masonary.jpg",
+      "description": "5-Piece Masonry Drill Bit Set"
+    },
+    {
+      "id": 37,
+      "name": "Tool Belt",
+      "category": "Storage",
+      "price": 4800,
+      "image": "/images/tool belt.webp",
+      "description": "Heavy-Duty Construction Tool Belt"
+    },
+    {
+      "id": 38,
+      "name": "PVC Pipe Cutter",
+      "category": "Hand Tools",
+      "price": 2500,
+      "image": "/images/pipe.jpeg",
+      "description": "Ratcheting PVC Pipe Cutter"
+    },
+    {
+      "id": 39,
+      "name": "Rubber Mallet",
+      "category": "Hand Tools",
+      "price": 1300,
+      "image": "/images/rubber.webp",
+      "description": "16 oz. Black Rubber Mallet"
+    },
+    {
+      "id": 40,
+      "name": "Work Apron",
+      "category": "Safety Equipment",
+      "price": 2000,
+      "image": "/images/worka.webp",
+      "description": "Heavy-Duty Canvas Work Apron"
+    },
+    {
+      "id": 41,
+      "name": "Tool Chest",
+      "category": "Storage",
+      "price": 18000,
+      "image": "/images/tool.jpeg",
+      "description": "5-Drawer Rolling Tool Chest"
+    },
+    {
+      "id": 42,
+      "name": "Laser Measure",
+      "category": "Measuring Tools",
+      "price": 7800,
+      "image": "/images/laser.jpeg",
+      "description": "100 ft. Laser Distance Measurer"
+    },
+    {
+      "id": 43,
+      "name": "Clamp Set",
+      "category": "Hand Tools",
+      "price": 2200,
+      "image": "/images/clamp.jpg",
+      "description": "4-Pack Quick-Grip Bar Clamps"
+    },
+    {
+      "id": 44,
+      "name": "Wire Stripper",
+      "category": "Electrical",
+      "price": 1800,
+      "image": "/images/wire.jpeg",
+      "description": "Automatic Wire Stripping Tool"
+    },
+    {
+      "id": 45,
+      "name": "Heat Gun",
+      "category": "Power Tools",
+      "price": 3200,
+      "image": "/images/heat gun.jpeg",
+      "description": "1500W Dual Temperature Heat Gun"
+    },
+    {
+      "id": 46,
+      "name": "Tool Bag",
+      "category": "Storage",
+      "price": 2800,
+      "image": "/images/tool belt.webp",
+      "description": "16 in. Durable Tool Carrying Bag"
+    },
+    
+    {
+      "id": 48,
+      "name": "Sawhorse Set",
+      "category": "Hand Tools",
+      "price": 6900,
+      "image": "/images/saworse.jpeg",
+      "description": "2-Pack Folding Sawhorses with Support Arms"
+    },
+    {
+      "id": 49,
+      "name": "Work Light",
+      "category": "Lighting",
+      "price": 3400,
+      "image": "/images/light.jpeg",
+      "description": "LED Rechargeable Work Light"
+    },
+    {
+      "id": 50,
+      "name": "Iron Spade",
+      "category": "Measuring Tools",
+      "price": 750,
+      "image": "/images/spades.jpg",
+      "description": "Multi-Purpose Wall Repair Putty"
+    },
+    
+    {
+      "id": 52,
+      "name": "Carpenter Pencil",
+      "category": "Measuring Tools",
+      "price": 500,
+      "image": "/images/pencil.jpeg",
+      "description": "Pack of 10 Carpenter Pencils"
+    },
+    {
+      "id": 53,
+      "name": "Lubricant Spray",
+      "category": "Maintenance",
+      "price": 1400,
+      "image": "/images/pliers.jpeg",
+      "description": "Multi-Use Lubricant Spray 200ml"
+    },
+    {
+      "id": 54,
+      "name": "Paint Scraper",
+      "category": "Painting Supplies",
+      "price": 1200,
+      "image": "/images/scrapper.jpeg",
+      "description": "4 in. Paint and Adhesive Scraper"
+    },
+    {
+      "id": 55,
+      "name": "Cordless Screwdriver",
+      "category": "Power Tools",
+      "price": 8900,
+      "image": "/images/screw.jpg",
+      "description": "Rechargeable Cordless Screwdriver Kit"
+    },
+    {
+      "id": 56,
+      "name": "Hat",
+      "category": "Safety Equipment",
+      "price": 13500,
+      "image": "/images/hat.png",
+      "description": "Steel Toe Waterproof Work Boots"
+    },
+    {
+      "id": 57,
+      "name": "Laser Measure",
+      "category": "Measuring Tools",
+      "price": 800,
+      "image": "/images/laser.jpeg",
+      "description": "Brass Plumb Bob with String"
+    },
+    {
+      "id": 58,
+      "name": "Material Coat",
+      "category": "Measuring Tools",
+      "price": 950,
+      "image": "/images/sun.jpg",
+      "description": "6 ft. Folding Wood Ruler"
+    },
+    {
+      "id": 59,
+      "name": "Wheel Barrow",
+      "category": "Adhesives",
+      "price": 1700,
+      "image": "/images/wheelbarrows.jpg",
+      "description": "2-Part Epoxy Adhesive Syringe"
     }
+   
   ]
 }
+
+ 

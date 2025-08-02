@@ -10,7 +10,7 @@ export default function OptionCard({ optionData }) {
     <div className="shadow-xl bg-white flex flex-col items-center gap-4 p-6 justify-center">
       <h2 className="text-xl font-bold">{title}</h2>
 
-      <div>
+   <div>
         <Icon strokeWidth="0.5px" className="w-36 h-36" />
       </div>
 

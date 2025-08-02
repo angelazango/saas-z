@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { Trash2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-
 import {
   fetchSessionMaterialsStart,
   fetchSessionMaterialsSuccess,
@@ -13,18 +12,12 @@ import {
   deleteSessionMaterialSuccess,
   deleteSessionMaterialFailure,
 } from '@/src/redux/blockSlice/sessionMaterialSlice';
-
 import { URL } from '@/config';
 import SessionMaterialForm from './new/page';
 
 export default function SessionMaterialList() {
   const dispatch = useDispatch();
-  const {
-    sessionMaterials = [],  // default empty array to avoid undefined errors
-    loading,
-    error,
-  } = useSelector((state) => state.sessionMaterial);
-
+  const { sessionMaterials = [], loading, error } = useSelector((state) => state.sessionMaterial);
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
@@ -32,30 +25,30 @@ export default function SessionMaterialList() {
   }, []);
 
   const fetchSessionMaterials = async () => {
-  dispatch(fetchSessionMaterialsStart());
-  try {
-    const response = await axios.get(`${URL}/blocks/session/material`);
-    
-    // Ensure we're properly extracting the array from response
-    const materials = response.data?.session_materials || [];
-    console.log('Fetched materials:', materials); // Debug log
-    
-    dispatch(fetchSessionMaterialsSuccess(materials));
-  } catch (err) {
-    dispatch(
-      fetchSessionMaterialsFailure(
-        err.response?.data?.message || 'Failed to fetch material records.'
-      )
-    );
-  }
-};
-  const handleAddSessionMaterial = () => {
-    setShowForm(true);
+    dispatch(fetchSessionMaterialsStart());
+    try {
+      const response = await axios.get(`${URL}/blocks/session/material`);
+      const materials = response.data?.session_materials || [];
+      console.log('Fetched materials:', materials); // Debug log
+      dispatch(fetchSessionMaterialsSuccess(materials));
+    } catch (err) {
+      dispatch(
+        fetchSessionMaterialsFailure(
+          err.response?.data?.message || 'Failed to fetch material records.'
+        )
+      );
+    }
+  };
+
+  const handleAddSessionMaterial = () => setShowForm(true);
+  const handleFormCancel = () => setShowForm(false);
+  const handleFormSuccess = () => {
+    setShowForm(false);
+    fetchSessionMaterials();
   };
 
   const handleDeleteSessionMaterial = async (id) => {
     if (!window.confirm('Are you sure you want to delete this material record?')) return;
-
     dispatch(deleteSessionMaterialStart());
     try {
       await axios.delete(`${URL}/blocks/session/material/${id}`);
@@ -69,14 +62,14 @@ export default function SessionMaterialList() {
     }
   };
 
-  const handleFormCancel = () => setShowForm(false);
-  const handleFormSuccess = () => {
-    setShowForm(false);
-    fetchSessionMaterials();
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
   };
 
   return (
-    <div className="max-w-8xl mx-auto p-6">
+    <div className="max-w-8xl ml-7 mx-auto p-6">
       <div className="bg-white rounded-lg shadow">
         {/* Header */}
         <div className="p-4 border-b flex justify-between items-center">
@@ -90,7 +83,7 @@ export default function SessionMaterialList() {
           </button>
         </div>
 
-        {/* Loading */}
+        {/* Loading State */}
         {loading && (
           <div className="p-8 text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto" />
@@ -98,7 +91,7 @@ export default function SessionMaterialList() {
           </div>
         )}
 
-        {/* Error */}
+        {/* Error State */}
         {error && !loading && (
           <div className="p-8 text-center text-red-500">
             <p className="text-red-600 mb-4">{error}</p>
@@ -125,7 +118,7 @@ export default function SessionMaterialList() {
           </div>
         )}
 
-        {/* Table with records */}
+        {/* Data Table */}
         {!loading && !error && sessionMaterials.length > 0 && (
           <>
             <div className="overflow-x-auto">
@@ -138,7 +131,7 @@ export default function SessionMaterialList() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unit</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th className="px-6  text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -149,8 +142,10 @@ export default function SessionMaterialList() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{record.material_name}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{record.quantity}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{record.unit}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{record.date}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {formatDate(record.date)}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <button
                           onClick={() => handleDeleteSessionMaterial(record.id)}
                           className="text-red-600 hover:text-red-900"

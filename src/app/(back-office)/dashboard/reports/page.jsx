@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Edit, PenBoxIcon, Trash2 } from 'lucide-react';
-
+import { PenBoxIcon, Trash2 } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import {
@@ -33,6 +32,11 @@ export default function PurchaseList() {
     } catch (err) {
       dispatch(fetchPurchasesFailure(err.response?.data?.message || 'Failed to fetch purchases.'));
     }
+  };
+
+  const formatDisplayDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    return dateString; // Display backend's format as-is (dd-MM-yyyy)
   };
 
   const handleAddPurchase = () => {
@@ -118,7 +122,7 @@ export default function PurchaseList() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Price (XAF)</th>
-                    {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cashier</th> */}
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                   </tr>
                 </thead>
@@ -129,28 +133,27 @@ export default function PurchaseList() {
                         {purchase.product_name || 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {purchase.quantity}
+                        {purchase.quantity ?? 'N/A'}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {purchase.total_price.toLocaleString()} XAF
+                        {purchase.total_price?.toLocaleString() ?? 'N/A'} XAF
                       </td>
-                      {/* <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {purchase.cashier_id || 'N/A'}
-                      </td> */}
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {formatDisplayDate(purchase.purchase_date)}
+                      </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                        <button 
+                        <button
                           onClick={() => handleEditPurchase(purchase)}
                           className="text-blue-600 hover:text-blue-900 mr-3"
                         >
-                           <PenBoxIcon className="w-5 h-5" />
+                          <PenBoxIcon className="w-5 h-5" />
                         </button>
-                        {/* <button
+                        <button
                           onClick={() => handleDeletePurchase(purchase.id)}
                           className="text-red-600 hover:text-red-900"
                         >
-                        
                           <Trash2 className="w-5 h-5" />
-                        </button> */}
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -166,10 +169,10 @@ export default function PurchaseList() {
       </div>
 
       {showForm && (
-        <PurchaseForm 
-          purchase={selectedPurchase} 
-          onCancel={handleFormCancel} 
-          onSuccess={handleFormSuccess} 
+        <PurchaseForm
+          purchase={selectedPurchase}
+          onCancel={handleFormCancel}
+          onSuccess={handleFormSuccess}
         />
       )}
     </div>

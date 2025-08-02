@@ -1,89 +1,96 @@
 'use client';
-
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
   Tooltip,
-  Legend,
-  TimeScale,
-} from 'chart.js';
-import 'chartjs-adapter-date-fns';
+  ResponsiveContainer,
+  CartesianGrid,
+  Cell,
+} from 'recharts';
+import { format, parse } from 'date-fns';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-);
+export default function SalesChart() {
+  const { sales = [] } = useSelector((state) => state.sale || {});
 
-const SalesChart = ({ salesData }) => {
-  // Filter out invalid dates
-  const validSales = salesData.filter(sale => 
-    sale.date && !isNaN(new Date(sale.date).getTime())
-  );
-
-  const chartData = {
-    labels: validSales.map(sale => sale.date),
-    datasets: [
-      {
-        label: 'Sales Amount',
-        data: validSales.map(sale => sale.amount),
-        backgroundColor: 'rgba(59, 130, 246, 0.7)',
-        borderColor: 'rgba(59, 130, 246, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    scales: {
-      x: {
-        type: 'time',
-        time: {
-          unit: 'day',
-          tooltipFormat: 'MMM d, yyyy',
-          displayFormats: {
-            day: 'MMM d'
-          },
-        },
-      },
-      y: {
-        beginAtZero: true,
-        ticks: {
-          callback: (value) => `$${value.toLocaleString()}`
-        }
+  // Process sales data by date
+  const dailySales = sales.reduce((acc, sale) => {
+    if (!sale.Sale_date) return acc;
+    
+    try {
+      // Parse date from DD-MM-YYYY format
+      const [day, month, year] = sale.Sale_date.split('-');
+      const date = new Date(`${year}-${month}-${day}`);
+      
+      if (isNaN(date.getTime())) return acc;
+      
+      const dateKey = format(date, 'MMM d');
+      
+      if (!acc[dateKey]) {
+        acc[dateKey] = { date: dateKey, quantity: 0 };
       }
-    },
-    plugins: {
-      tooltip: {
-        callbacks: {
-          label: (context) => {
-            return `$${context.parsed.y.toLocaleString()}`;
-          },
-          title: (context) => {
-            return new Date(context[0].label).toLocaleDateString();
-          }
-        }
-      }
+      
+      acc[dateKey].quantity += sale.quantity || 0;
+    } catch (error) {
+      console.error('Error processing sale date:', error);
     }
+    
+    return acc;
+  }, {});
+
+  // Convert to array and sort by date
+  const data = Object.values(dailySales).sort((a, b) => {
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload?.length) {
+      return (
+        <div className="bg-gray-900 px-4 py-3 rounded-md shadow-md border border-white/20">
+          <p className="text-white font-medium text-sm mb-1">{label}</p>
+          <p className="text-blue-300 font-semibold">
+            {`${payload[0].value} items sold`}
+          </p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
-    <div className="mt-8 bg-white p-4 rounded-lg shadow">
-      <h2 className="text-xl font-semibold mb-4">Sales Trend</h2>
-      <Bar data={chartData} options={options} />
+    <div className="relative bg-white p-6 rounded-xl shadow-md w-full border border-slate-200 mb-6">
+      <div className="mb-4">
+        <h2 className="text-xl font-semibold text-slate-800">Daily Sales Quantity</h2>
+        <p className="text-sm text-slate-500">Items sold per day</p>
+      </div>
+      
+      {data.length > 0 ? (
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
+            <XAxis 
+              dataKey="date"
+              tick={{ fill: '#64748b', fontSize: 12 }}
+            />
+            <YAxis 
+              tick={{ fill: '#64748b', fontSize: 12 }}
+              label={{ value: 'Quantity', angle: -90, position: 'insideLeft' }}
+            />
+            <Tooltip content={<CustomTooltip />} />
+            <Bar dataKey="quantity" fill="#3b82f6" radius={[4, 4, 0, 0]}>
+              {data.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill="#3b82f6" />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      ) : (
+        <div className="text-center py-8 text-gray-500">
+          No sales data available for the chart
+        </div>
+      )}
     </div>
   );
-};
-
-export default SalesChart;
-
+}

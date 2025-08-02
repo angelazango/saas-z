@@ -14,7 +14,7 @@ import productBlockReducer from './blockSlice/productSlice';
 import teamReducer from './blockSlice/teamSlice';
 import kpiReducer from './slice/kpiSlice';
 import sessionProductReducer from './blockSlice/sessionProductSlice';
-import sessionMaterialReducer from './blockSlice/materialSlice';
+import sessionMaterialReducer from './blockSlice/sessionMaterialSlice';
 import authReducer from './slice/authSlice';
 
 const store = configureStore({

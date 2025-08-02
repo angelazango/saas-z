@@ -1,18 +1,30 @@
 'use client';
 
-import { useEffect } from 'react'; 
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 export default function Home() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true); // track loading
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('isLoggedIn');
+
     if (isLoggedIn !== 'true') {
-      router.push('/login'); // Redirect to login if not logged in
+      router.push('/login');
+    } else {
+      setLoading(false); // allow render
     }
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        Loading...
+      </div>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-900">
@@ -23,7 +35,7 @@ export default function Home() {
           <div className="flex-1">
             <div className="max-w-lg">
               <div className="relative mb-8">
-                <h2 className="text-7xl md:text-8xl font-black text-transparent
+                <h2 className="text-7xl md:text-8xl animate-bounce font-black text-transparent
                  bg-clip-text bg-gradient-to-r -mt-9 from-yellow-600 to-orange-600">
                   SAAS-Z
                 </h2>

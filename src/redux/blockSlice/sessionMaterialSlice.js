@@ -16,8 +16,10 @@ const sessionMaterialSlice = createSlice({
     },
     fetchSessionMaterialsSuccess: (state, action) => {
       state.loading = false;
-      // Create a new array reference to ensure React detects the change
-      state.sessionMaterials = [...action.payload]; 
+      state.sessionMaterials = action.payload.map(item => ({
+        ...item,
+        date: item.date || new Date().toISOString().split('T')[0] // Ensure date exists
+      }));
       state.error = null;
     },
     fetchSessionMaterialsFailure: (state, action) => {
@@ -30,8 +32,13 @@ const sessionMaterialSlice = createSlice({
     },
     createSessionMaterialSuccess: (state, action) => {
       state.loading = false;
-      // Create a new array instead of pushing to existing one
-      state.sessionMaterials = [...state.sessionMaterials, action.payload];
+      state.sessionMaterials = [
+        ...state.sessionMaterials, 
+        {
+          ...action.payload,
+          date: action.payload.date || new Date().toISOString().split('T')[0]
+        }
+      ];
       state.error = null;
     },
     createSessionMaterialFailure: (state, action) => {
@@ -55,8 +62,6 @@ const sessionMaterialSlice = createSlice({
     },
   },
 });
-
-// Export actions and reducer as before
 
 export const {
   fetchSessionMaterialsStart,

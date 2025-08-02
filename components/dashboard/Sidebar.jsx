@@ -65,7 +65,7 @@ const [isLoggingOut, setIsLoggingOut] = useState(false); // for showing loading 
     localStorage.removeItem('userData');
 
     // redirect to login page
-    router.push('/login'); // update path if different
+    router.push('/signup'); // update path if different
   }, 1500); // optional delay to show loading state
 };
 
@@ -74,7 +74,7 @@ const [isLoggingOut, setIsLoggingOut] = useState(false); // for showing loading 
       className={`fixed h-screen top-0 left-0 z-50
         bg-gradient-to-b from-slate-950 via-slate-900 to-slate-700 
         text-slate-50 transition-all duration-300 ease-in-out
-        ${collapsed ? 'w-38' : 'w-64 shadow-xl'}`}
+        ${collapsed ? 'w-48' : 'w-65 shadow-xl'}`}
     >
       {/* Animated background gradient overlay */}
       <div
@@ -90,7 +90,7 @@ const [isLoggingOut, setIsLoggingOut] = useState(false); // for showing loading 
         flex items-center justify-center text-white hover:scale-110
         transition-all duration-200 transform"
       >
-        {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        {collapsed ? <ChevronRight className="w-4 h-4"/> : <ChevronLeft className="w-4 h-4" />}
       </button>
 
       {/* Sidebar content */}
@@ -111,7 +111,7 @@ const [isLoggingOut, setIsLoggingOut] = useState(false); // for showing loading 
               to-cyan-300 bg-clip-text text-transparent group-hover:from-blue-200 
               group-hover:to-cyan-200 transition-all duration-300"
             >
-              SAASZ
+              Inventory 
             </span>
           )}
         </Link>

@@ -60,7 +60,7 @@ export default function SessionProductList() {
     <div className="max-w-8xl mx-auto p-6">
       <div className="bg-white rounded-lg shadow">
         <div className="p-4 border-b flex justify-between items-center">
-          <h2 className="text-2xl font-semibold text-gray-800">Production Records</h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Product Records</h2>
           <button
             onClick={handleAddSessionProduct}
             className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 flex items-center space-x-2"
@@ -92,7 +92,7 @@ export default function SessionProductList() {
         {!loading && !error && sessionProducts.length === 0 && (
           <div className="p-8 text-center text-gray-500">
             <h3 className="text-xl font-medium text-gray-900 mb-2">No production records found</h3>
-            <p className="text-gray-500 mb-6">Get started by recording your first production.</p>
+            <p className="text-gray-500 mb-6">Get started by recording your first product.</p>
             <button
               onClick={handleAddSessionProduct}
               className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
@@ -134,7 +134,7 @@ export default function SessionProductList() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500">{record.production_date}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <button
                           onClick={() => handleDeleteSessionProduct(record.id)}
                           className="text-red-600 hover:text-red-900"

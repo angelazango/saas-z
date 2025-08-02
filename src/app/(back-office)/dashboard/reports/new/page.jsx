@@ -2,13 +2,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { URL } from '@/config';
+import { format, parse } from 'date-fns';
 
 export default function PurchaseForm({ purchase, onCancel, onSuccess }) {
   const [formData, setFormData] = useState({
     product_id: purchase?.product_id || '',
     quantity: purchase?.quantity || 1,
     total_price: purchase?.total_price || 0,
-    // cashier_id: purchase?.cashier_id || '',
+    purchase_date: purchase?.purchase_date
+      ? format(parse(purchase.purchase_date, 'dd-MM-yyyy', new Date()), 'yyyy-MM-dd')
+      : format(new Date(), 'yyyy-MM-dd'),
   });
 
   const [products, setProducts] = useState([]);
@@ -45,13 +48,11 @@ export default function PurchaseForm({ purchase, onCancel, onSuccess }) {
 
     try {
       const payload = {
-        product_id: formData.product_id,
-        quantity: formData.quantity,
-        total_price: formData.total_price, // Stored as XOF (no symbol)
-        // cashier_id: formData.cashier_id
+        ...formData,
+        purchase_date: format(parse(formData.purchase_date, 'yyyy-MM-dd', new Date()), 'dd-MM-yyyy'),
       };
 
-      if (purchase) {
+      if (purchase?.id) {
         await axios.put(`${URL}/purchase/${purchase.id}`, payload);
       } else {
         await axios.post(`${URL}/purchase`, payload);
@@ -99,45 +100,46 @@ export default function PurchaseForm({ purchase, onCancel, onSuccess }) {
               </select>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Quantity
-              </label>
-              <input
-                type="number"
-                name="quantity"
-                min="1"
-                value={formData.quantity}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                required
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Quantity
+                </label>
+                <input
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  value={formData.quantity}
+                  onChange={handleChange}
+                  className="w-full p-2 border rounded"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Total Price (XAF)
+                </label>
+                <input
+                  type="number"
+                  name="total_price"
+                  min="0"
+                  step="1"
+                  value={formData.total_price}
+                  onChange={handleChange}
+                  className="w-full p-2 border rounded"
+                  required
+                />
+              </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Total Price (XAF)
+                Purchase Date
               </label>
               <input
-                type="number"
-                name="total_price"
-                min="0"
-                step="1" // XOF typically doesn't use decimals
-                value={formData.total_price}
-                onChange={handleChange}
-                className="w-full p-2 border rounded"
-                required
-              />
-            </div>
-
-            <div>
-              {/* <label className="block text-sm font-medium text-gray-700 mb-1">
-                Cashier ID
-              </label> */}
-              <input
-                type="text"
-                // name="cashier_id"
-                // value={formData.cashier_id}
+                type="date"
+                name="purchase_date"
+                value={formData.purchase_date}
                 onChange={handleChange}
                 className="w-full p-2 border rounded"
                 required
