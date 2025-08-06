@@ -12,26 +12,27 @@ import {
   Cell,
 } from 'recharts';
 
-export default function TopSellingProductsChart({ products = [] }) {
+export default function TopSellingProductsChart({ products }) {
   const [topProducts, setTopProducts] = useState([]);
 
   useEffect(() => {
-    if (!Array.isArray(products) || products.length === 0) return;
+    if (products.length > 0) {
+      const grouped = {};
 
-    const grouped = {};
+      // Aggregate by category + product
+      products.forEach((product) => {
+        const key = `${product.category_name} - ${product.product_name}`;
+        grouped[key] = (grouped[key] || 0) + (product.quantity_sold || 0);
+      });
 
-    // Group products by category-product pair
-    products.forEach((product) => {
-      const key = `${product.category_name} - ${product.product_name}`;
-      grouped[key] = (grouped[key] || 0) + (product.quantity_sold || 0);
-    });
+      // Convert and sort descending
+      const sorted = Object.entries(grouped)
+        .map(([name, sales]) => ({ name, sales }))
+        .sort((a, b) => b.sales - a.sales)
+        .slice(0, 5); // Top 5
 
-    const sorted = Object.entries(grouped)
-      .map(([name, sales]) => ({ name, sales }))
-      .sort((a, b) => b.sales - a.sales)
-      .slice(0, 5); // Top 5
-
-    setTopProducts(sorted);
+      setTopProducts(sorted);
+    }
   }, [products]);
 
   return (
