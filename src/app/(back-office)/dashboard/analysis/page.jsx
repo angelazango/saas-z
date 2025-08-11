@@ -27,8 +27,8 @@ useFetchPurchasesRealtime();
       <SalesChart />
 
       <div className='grid grid-cols-1 gap-4'>
-<PurchasesChart />
-{/* <TopSellingProductsChart /> */}
+{/* <PurchasesChart /> */}
+{/* <TopSellingProductsChart />*/}
       {/* <TopSellingProductsPieChart /> */}
       </div>
       
