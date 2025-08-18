@@ -30,9 +30,9 @@ const [isLoggingOut, setIsLoggingOut] = useState(false); // for showing loading 
     { title: 'Products', href: '/dashboard/inventory/items' },
     { title: 'Categories', href: '/dashboard/inventory/categories' },
     { title: 'Vendors', href: '/dashboard/inventory/brands' },
-    { title: 'Units', href: '/dashboard/inventory/units/new' },
-    { title: 'Warehouse', href: '/dashboard/inventory/warehouse/new' },
-    { title: 'Catalogue', href: '/dashboard/inventory/catalogue' },
+    // { title: 'Units', href: '/dashboard/inventory/units/new' },
+    // { title: 'Warehouse', href: '/dashboard/inventory/warehouse/new' },
+    // { title: 'Catalogue', href: '/dashboard/inventory/catalogue' },
   ];
 
   const salesLinks = [
@@ -144,15 +144,15 @@ const [isLoggingOut, setIsLoggingOut] = useState(false); // for showing loading 
           />
 
           {/* Sales dropdown */}
-          <SideBarDropdownLink
+          {/* <SideBarDropdownLink
             items={salesLinks}
             title="Sales"
             icon={ShoppingBasket}
             collapsed={collapsed}
             active={activeMenu === 'sales'}
-            onClick={() => toggleMenu('sales')}
-          />
-
+            onClick={() => toggleMenu('sales')}cat
+          /> */}
+    
           {/* Other links */}
           <div className="mt-2 space-y-1">
             {[

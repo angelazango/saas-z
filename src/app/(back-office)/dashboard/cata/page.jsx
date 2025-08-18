@@ -53,18 +53,19 @@ export default function ProductCatalog() {
     <div className="min-h-screen bg-gray-50 py-4">
       <div className="max-w-screen-xl mx-auto px-4">
         {/* Title */}
-        <h1 className="text-3xl font-bold text-red-800 animate-bounce mb-8">Product Catalog</h1>
+        <h1 className="text-2xl font-bold text-red-800 animate-bounce mb-5">Product Catalog</h1>
 
         {/* Filters */}
-        <div className="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow mb-8">
+        <div className="grid md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Search Products</label>
+            <label className="text-sm font-medium text-gray-700 mb-2">Search Products</label>
             <input
               type="text"
               placeholder="Search by name..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-gray-300 rounded-md p-3 focus:ring-2 focus:ring-blue-100 focus:border-blue-500"
+              className="w-full  border border-gray-300 rounded-md p-3 focus:ring-2 
+              focus:ring-blue-100 focus:border-blue-500"
             />
           </div>
           <div>
@@ -82,7 +83,7 @@ export default function ProductCatalog() {
         </div>
 
         {/* Filter summary */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center ">
           <p className="text-sm text-gray-600">
             Showing {filteredProducts.length} of {products.length} products
           </p>

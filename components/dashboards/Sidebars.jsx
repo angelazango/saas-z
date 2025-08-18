@@ -216,17 +216,7 @@ const Sidebars = () => {
             </Link>
 
 
-              <Link
-              href="/dashboards/sessionMaterials"
-              className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
-              hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
-               group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"
-            >
-              <Layers2 className="w-5 h-5 text-slate-400 group-hover:text-pink-400 
-              transition-colors duration-300" />
-              {!collapsed && <span className="group-hover:text-pink-300 transition-colors
-               duration-300">Session Materials</span>}
-            </Link>
+      
 
             <Link
               href="/dashboards/sessionProduct"
