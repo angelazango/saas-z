@@ -12,7 +12,7 @@ export default function LoginPage() {
   const [message, setMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false); // ✅ ADD THIS LINE
   const router = useRouter();
-
+  
   useEffect(() => {
     const storedLoggedIn = localStorage.getItem('isLoggedIn');
     if (storedLoggedIn === 'true') {
@@ -141,7 +141,7 @@ export default function LoginPage() {
                   </span>
                 </button>
 
-                {/* Facebook Button */}
+                 {/* Facebook Button */}
                 <button className="border-2 border-gray-200 text-gray-900 px-8 py-2 rounded-xl font-bold hover:scale-105 hover:shadow-2xl">
                   <span className="flex items-center gap-3">
                     <img

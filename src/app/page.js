@@ -25,8 +25,7 @@ export default function Home() {
       </div>
     );
   }
-
-  return (
+return (
     <div className="flex min-h-screen bg-gray-900">
       {/* Main Container with Dark Background */}
       <div className="flex-1 p-8 flex justify-center items-center">
