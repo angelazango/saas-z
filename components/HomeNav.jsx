@@ -7,14 +7,14 @@ import { usePathname } from 'next/navigation';
 export default function HomeNav() {
   const pathname = usePathname();
   const navLinks = [
-    { title: 'Dashboard', href: '/dashboard/home/overview' },
-    { title: 'Getting Started', href: '/dashboard/home/getting-started' },
+    { title: 'Dashboard', href: '/dashboard/home/overview'},
+    { title: 'Getting Started', href: '/dashboard/home/getting-started'},
     { title: 'Recent Updates', href: '/dashboard/home/updates'},
-    { title: 'Announcements', href: '/dashboard/home/announcements' },
+    { title: 'Announcements', href: '/dashboard/home/announcements'},
   ];
   return (
     <div className="h-32 p-5 bg-slate-50 border-b border-slate-300   ">
-      <div className="flex space-x-3 ">
+      <div className="flex space-x-3">
         <div className="flex">
           <div className="flex w-14 h-14 rounded-lg bg-white items-center justify-center">
             <Building2 />

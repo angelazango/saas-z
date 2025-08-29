@@ -128,8 +128,7 @@ export default function ProductForm({ onCancel, onSuccess }) {
             </select>
           </div>
 
-          <div>
-            <label className="block text-sm font-medium mb-1">Initial Quantity *</label>
+          {/* <div>
             <input
               type="number"
               name="quantity_left"
@@ -139,7 +138,7 @@ export default function ProductForm({ onCancel, onSuccess }) {
               className="w-full border p-2 rounded focus:ring-2 focus:ring-blue-500"
               required
             />
-          </div>
+          </div> */}        
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 
@@ -154,7 +153,8 @@ export default function ProductForm({ onCancel, onSuccess }) {
             </button>
             <button
               type="submit"
-              className="flex-1 bg-blue-600 text-white p-2 rounded hover:bg-blue-700 disabled:opacity-50"
+              className="flex-1 bg-blue-600 text-white p-2 rounded
+               hover:bg-blue-700 disabled:opacity-50"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Creating...' : 'Create Product'}

@@ -277,7 +277,7 @@ const Sidebars = () => {
               <ChevronLeft className="w-5 h-5 text-slate-300 group-hover:text-white 
               transition-all duration-300 group-hover:-translate-x-0.5" />
               <span className="text-sm font-medium text-slate-300 group-hover:text-white 
-              transition-colors duration-300">Collapse</span>
+              transition-colors duration-300"> </span>
             </>
           )}
         </button>

@@ -106,7 +106,7 @@ export default function ProductForm({ product, onCancel, onSuccess }) {
             />
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium mb-1">Quantity Left *</label>
             <input
               type="number"
@@ -117,7 +117,7 @@ export default function ProductForm({ product, onCancel, onSuccess }) {
               className="w-full border p-2 rounded focus:ring-2 focus:ring-blue-500"
               required
             />
-          </div>
+          </div> */}
 
           {error && <p className="text-red-500 text-sm">{error}</p>}
 

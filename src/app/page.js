@@ -55,7 +55,7 @@ return (
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/dashboard/home/overview" className="group relative overflow-hidden
+                <Link href="/dashboard/analysis" className="group relative overflow-hidden
                  border-2 border-white bg-gradient-to-r from-transparent via-white/5 to-transparent
                   backdrop-blur-sm hover:from-white/10 hover:via-white/20 hover:to-white/10 text-white 
                   px-8 py-4 rounded-xl text-lg font-bold transition-all duration-500 ease-out text-center 

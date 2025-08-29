@@ -17,7 +17,6 @@ import PurchaseKpiCards from '@/components/dashboards/purchaseKpiCards';
 import PurchaseTrendChart from '@/components/dashboards/purchaseTrendChart';
 import TopSellingProducts from '@/components/dashboards/topSellingProducts';
 
-
 import SessionKpiCards from '@/components/dashboards/sessionKpi';
 import SessionProductionChart from '@/components/dashboards/sessionProductionChart';
 
