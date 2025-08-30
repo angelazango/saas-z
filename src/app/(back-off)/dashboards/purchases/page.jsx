@@ -143,12 +143,12 @@ export default function PurchaseList() {
                         <div className="text-sm text-gray-500">{purchase.purchase_date}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                        <button
+                        {/* <button
                           onClick={() => handleEditPurchase(purchase)}
                           className="text-blue-600 hover:text-blue-900 mr-4"
                         >
                           <Edit className="w-5 h-5" />
-                        </button>
+                        </button> */}
                         <button
                           onClick={() => handleDeletePurchase(purchase.id)}
                           className="text-red-600 hover:text-red-900"

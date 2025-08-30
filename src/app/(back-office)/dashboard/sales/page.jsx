@@ -166,13 +166,13 @@ export default function SaleList() {
                         {formatSaleDate(sale.Sale_date)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium flex space-x-3">
-                        <button
+                        {/* <button
                           onClick={() => handleEditSale(sale)}
                           className="text-blue-600 hover:text-blue-900"
                           title="Edit"
                         >
                           <PenIcon size={16} />
-                        </button>
+                        </button> */}
                         <button
                           onClick={() => handleDeleteSale(sale.id)}
                           className="text-red-600 hover:text-red-900"

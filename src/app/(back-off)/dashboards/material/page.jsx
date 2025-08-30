@@ -122,7 +122,7 @@ export default function MaterialList() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unit</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> */}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -137,7 +137,7 @@ export default function MaterialList() {
                       <td className="px-6 py-4">
                         <div className="text-sm text-gray-500">{material.description}</div>
                       </td>
-                      <td className="px-6 py-4 text-left whitespace-nowrap  text-sm font-medium">
+                      {/* <td className="px-6 py-4 text-left whitespace-nowrap  text-sm font-medium">
                         <button
                           onClick={() => handleEditMaterial(material)}
                           className="text-blue-600 hover:text-blue-900 mr-4"
@@ -150,7 +150,7 @@ export default function MaterialList() {
                         >
                           Delete
                         </button>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

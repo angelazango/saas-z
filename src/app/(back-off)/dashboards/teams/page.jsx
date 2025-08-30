@@ -140,13 +140,13 @@ export default function TeamList() {
                         <div className="text-sm text-gray-500">{team.email}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                        <button
+                        {/* <button
                           aria-label="Edit team"
                           onClick={() => handleEditTeam(team)}
                           className="text-blue-600 hover:text-blue-900 mr-4"
                         >
                           <Edit className="w-5 h-5" />
-                        </button>
+                        </button> */}
                         <button
                           aria-label="Delete team"
                           onClick={() => handleDeleteTeam(team.id)}

@@ -38,17 +38,17 @@ export default function SessionProductList() {
     setShowForm(true);
   };
 
-  const handleDeleteSessionProduct = async (sessionProductId) => {
-    if (window.confirm('Are you sure you want to delete this production record?')) {
-      try {
-        dispatch(deleteSessionProductStart());
-        await axios.delete(`${URL}/blocks/session/product/${sessionProductId}`);
-        dispatch(deleteSessionProductSuccess(sessionProductId));
-      } catch (err) {
-        dispatch(deleteSessionProductFailure(err.response?.data?.message || 'Failed to delete production record.'));
-      }
-    }
-  };
+  // const handleDeleteSessionProduct = async (sessionProductId) => {
+  //   if (window.confirm('Are you sure you want to delete this production record?')) {
+  //     try {
+  //       dispatch(deleteSessionProductStart());
+  //       await axios.delete(`${URL}/blocks/session/product/${sessionProductId}`);
+  //       dispatch(deleteSessionProductSuccess(sessionProductId));
+  //     } catch (err) {
+  //       dispatch(deleteSessionProductFailure(err.response?.data?.message || 'Failed to delete production record.'));
+  //     }
+  //   }
+  // };
 
   const handleFormCancel = () => setShowForm(false);
   const handleFormSuccess = () => {
@@ -113,7 +113,7 @@ export default function SessionProductList() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> */}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -134,14 +134,14 @@ export default function SessionProductList() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-500">{record.production_date}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                      {/* <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <button
                           onClick={() => handleDeleteSessionProduct(record.id)}
                           className="text-red-600 hover:text-red-900"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>

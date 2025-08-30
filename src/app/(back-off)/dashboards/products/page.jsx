@@ -45,17 +45,17 @@ export default function ProductList() {
     setShowForm(true);
   };
 
-  const handleDeleteProduct = async (productId) => {
-    if (window.confirm('Are you sure you want to delete this product?')) {
-      try {
-        dispatch(deleteProductStart());
-        await axios.delete(`${URL}/blocks/product/${productId}`);
-        dispatch(deleteProductSuccess(productId));
-      } catch (err) {
-        dispatch(deleteProductFailure(err.response?.data?.message || 'Failed to delete product.'));
-      }
-    }
-  };
+  // const handleDeleteProduct = async (productId) => {
+  //   if (window.confirm('Are you sure you want to delete this product?')) {
+  //     try {
+  //       dispatch(deleteProductStart());
+  //       await axios.delete(`${URL}/blocks/product/${Id}`);
+  //       dispatch(deleteProductSuccess(productId));
+  //     } catch (err) {
+  //       dispatch(deleteProductFailure(err.response?.data?.message || 'Failed to delete product.'));
+  //     }
+  //   }
+  // };
 
   const handleFormCancel = () => setShowForm(false);
   const handleFormSuccess = () => {
@@ -118,7 +118,7 @@ export default function ProductList() {
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product Name</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity Left</th>
-                    <th className="px-6 py-3  text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    {/* <th className="px-6 py-3  text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th> */}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -133,7 +133,7 @@ export default function ProductList() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{product.quantity_left}</div>
                       </td>
-                      <td className="px-5 py-4 whitespace-nowrap text-left text-sm font-medium">
+                      {/* <td className="px-5 py-4 whitespace-nowrap text-left text-sm font-medium">
                         <button
                           onClick={() => handleEditProduct(product)}
                           className="text-blue-600 hover:text-blue-900 mr-4"
@@ -146,7 +146,7 @@ export default function ProductList() {
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
-                      </td>
+                      </td> */}
                     </tr>
                   ))}
                 </tbody>
