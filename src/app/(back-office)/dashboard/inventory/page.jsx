@@ -58,7 +58,7 @@ export default function Inventory() {
       linkTitle:"New units",
       enabled: true,
       icon: Component,
-    },
+    }, 
   ];
 
   return (
@@ -72,7 +72,8 @@ export default function Inventory() {
         ))}
 
         {/* Second Section */}
-        <div className="shadow-md bg-white rounded flex flex-col items-center gap-4 p-6 justify-center">
+        <div className="shadow-md bg-white rounded flex flex-col
+         items-center gap-4 p-6 justify-center">
           <h2 className="text-xl font-bold">Items Group</h2>
           <Shirt strokeWidth="0.5px" className="w-36 h-36" />
           <p className="line-clamp-1 text-center">
