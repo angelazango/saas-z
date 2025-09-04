@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -46,17 +45,7 @@ export default function LoginPage() {
   if (isLoggedIn) {
     return (
       <div className="min-h-screen bg-blue-50 justify-center flex items-center ">
-        {/* <div className="bg-white p-8 rounded-lg border shadow-md max-w-md w-full text-center">
-          <h1 className="text-2xl font-bold text-green-600 mb-4">Success!</h1>
-          <p className="text-gray-700 mb-4">Hello {email}!</p>
-          <p className="text-gray-600 mb-6">You are now logged in! Enjoy the app.</p>
-          <button
-            onClick={handleLogout}
-            className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-200"
-          >
-            Logout
-          </button>
-        </div> */}
+        
       </div>
     );
   }

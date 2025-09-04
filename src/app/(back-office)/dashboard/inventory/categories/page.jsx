@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -127,7 +126,7 @@ export default function CategoryList() {
                         onClick={() => handleEditCategory(category)}
                         className="text-blue-600 hover:text-blue-800 text-sm"
                       >
-                        Edit
+                        Edit  v
                       </button> */}
                       <button
                         onClick={() => handleDeleteCategory(category.id)}

@@ -53,7 +53,8 @@ export default function VendorList() {
           <h2 className="text-2xl font-semibold text-gray-800">Vendors List</h2>
           <button
             onClick={handleAddVendor}
-            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 flex items-center space-x-2"
+            className="bg-blue-600 text-white px-6 py-2 rounded 
+            hover:bg-blue-700 flex items-center space-x-2"
           >
             <span>+</span>
             <span>Add Vendor</span>

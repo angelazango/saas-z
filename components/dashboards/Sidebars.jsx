@@ -231,7 +231,7 @@ const Sidebars = () => {
             </Link>
 
               <Link
-              href="/dashboard/inventory"
+              href="/dashboard/analysis"
               className="flex items-center space-x-3 py-3 px-4 hover:bg-gradient-to-r 
               hover:from-slate-800 hover:to-slate-700 rounded-xl transition-all duration-300
                group hover:shadow-lg hover:shadow-slate-700/20 transform hover:translate-x-1"

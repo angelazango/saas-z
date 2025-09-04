@@ -78,5 +78,8 @@
   "bugs": {
     "url": "https://github.com/angelazango/saas-z/issues"
   },
-  "homepage": "https://github.com/angelazango/saas-z#readme"
+  "homepage": "https://github.com/angelazango/saas-z#readme",
+  "engines": {
+    "node": "20.x"
+  }
 }

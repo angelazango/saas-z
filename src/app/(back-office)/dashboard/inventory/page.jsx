@@ -11,14 +11,7 @@ import Link from 'next/link';
 export default function Inventory() {
 // const { title,description,link,linkTitle,enabled } = optionData;
   const optionCards = [
-    // {
-    //   title: "Items Groups",
-    //   description: "Create what you like and more",
-    //   link: "/new",
-    //   linkTitle: "Nesw Item Group",
-    //   enabled: true,
-    //   icon: Component,
-    // },
+   
     {
       title: "Items",
       description: "Create what you like",
